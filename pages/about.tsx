@@ -117,65 +117,67 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70"></div>
 
         {/* Navigation */}
-        <nav className="relative z-20 flex items-center justify-between px-8 py-6">
-          <div className="flex items-center space-x-8">
+        <nav className="relative z-20 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex items-center space-x-4 sm:space-x-8">
             <Link href="/" className="flex items-center space-x-2 text-white">
-              <Leaf className="h-8 w-8" />
-              <span className="text-2xl font-bold">Klimacek</span>
+              <Leaf className="h-6 w-6 sm:h-8 sm:w-8" />
+              <span className="text-xl sm:text-2xl font-bold">Klimacek</span>
             </Link>
-            <Link href="/weather-stations" className="text-white/90 hover:text-white transition-colors">
-              Stasiun Cuaca
-            </Link>
-            <Link href="/products" className="text-white/90 hover:text-white transition-colors">
-              Produk Kami
-            </Link>
-            <Link href="/about" className="text-white font-medium">
-              Tentang Kami
-            </Link>
+            <div className="hidden md:flex space-x-6 lg:space-x-8">
+              <Link href="/weather-stations" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                Stasiun Cuaca
+              </Link>
+              <Link href="/products" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                Produk Kami
+              </Link>
+              <Link href="/about" className="text-white font-medium text-sm lg:text-base">
+                Tentang Kami
+              </Link>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <Link href="/login" className="text-white/90 hover:text-white transition-colors">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link href="/login" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
               Login
             </Link>
-            <Link href="/signup" className="px-6 py-2 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors">
+            <Link href="/signup" className="px-3 py-1.5 sm:px-6 sm:py-2 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors text-sm lg:text-base">
               Sign Up
             </Link>
           </div>
         </nav>
 
         {/* Header Section */}
-        <div className="relative z-10 py-16">
-          <div className="max-w-7xl mx-auto px-8 text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+        <div className="relative z-10 py-8 sm:py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
               Profil Tim
             </h1>
-            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto">
               Kenali tim ahli di balik Klimacek - solusi cerdas untuk menghadapi tantangan perubahan iklim dalam sektor pertanian dan perikanan
             </p>
             
             {/* Team Structure Overview */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-16">
-              <h2 className="text-3xl font-bold text-white mb-6">Struktur Tim</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-white">
-                <div className="bg-white/20 rounded-xl p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-white">Hustler</h3>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 mb-8 sm:mb-12 lg:mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">Struktur Tim</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 text-white">
+                <div className="bg-white/20 rounded-xl p-3 sm:p-4">
+                  <h3 className="font-semibold text-base sm:text-lg mb-2 text-white">Hustler</h3>
                   <p className="text-sm text-white">Bisnis & Pemasaran</p>
                 </div>
-                <div className="bg-white/20 rounded-xl p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-white">Hacker</h3>
+                <div className="bg-white/20 rounded-xl p-3 sm:p-4">
+                  <h3 className="font-semibold text-base sm:text-lg mb-2 text-white">Hacker</h3>
                   <p className="text-sm text-white">Teknologi & Pengembangan</p>
                 </div>
-                <div className="bg-white/20 rounded-xl p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-white">Hipster</h3>
+                <div className="bg-white/20 rounded-xl p-3 sm:p-4">
+                  <h3 className="font-semibold text-base sm:text-lg mb-2 text-white">Hipster</h3>
                   <p className="text-sm text-white">Desain & Branding</p>
                 </div>
-                <div className="bg-white/20 rounded-xl p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-white">Operator</h3>
+                <div className="bg-white/20 rounded-xl p-3 sm:p-4">
+                  <h3 className="font-semibold text-base sm:text-lg mb-2 text-white">Operator</h3>
                   <p className="text-sm text-white">Operasional & Proses</p>
                 </div>
-                <div className="bg-white/20 rounded-xl p-4 md:col-span-2 lg:col-span-1">
-                  <h3 className="font-semibold text-lg mb-2 text-white">Administrator</h3>
+                <div className="bg-white/20 rounded-xl p-3 sm:p-4 sm:col-span-2 lg:col-span-1">
+                  <h3 className="font-semibold text-base sm:text-lg mb-2 text-white">Administrator</h3>
                   <p className="text-sm text-white">Finansial & Administratif</p>
                 </div>
               </div>
@@ -184,10 +186,10 @@ export default function About() {
         </div>
 
         {/* Team Members Section */}
-        <div className="relative z-10 pb-16">
-          <div className="max-w-7xl mx-auto px-8">
+        <div className="relative z-10 pb-8 sm:pb-12 lg:pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Staggered Cards Layout */}
-            <div className="space-y-12">
+            <div className="space-y-8 sm:space-y-12">
               {teamMembers.map((member, index) => (
                 <div
                   key={member.id}
@@ -196,14 +198,14 @@ export default function About() {
                     marginTop: index === 0 ? '0' : '3rem'
                   }}
                 >
-                  <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-4xl w-full">
+                  <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 max-w-4xl w-full">
                     {/* Content Only Layout */}
                     <div className="text-center">
                       {/* Content */}
                       <div className="w-full">
-                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{member.name}</h2>
-                        <p className="text-blue-600 font-semibold mb-4 text-base md:text-lg">{member.role}</p>
-                        <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-6">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">{member.name}</h2>
+                        <p className="text-blue-600 font-semibold mb-3 sm:mb-4 text-sm sm:text-base md:text-lg">{member.role}</p>
+                        <p className="text-gray-700 text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6">
                           {member.description}
                         </p>
                       </div>
@@ -217,27 +219,27 @@ export default function About() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="flex justify-center space-x-6 mb-8">
-            <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Facebook className="w-5 h-5" />
+      <footer className="bg-gray-900 text-white py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center space-x-4 sm:space-x-6 mb-6 sm:mb-8">
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+              <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Twitter className="w-5 h-5" />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+              <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Instagram className="w-5 h-5" />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+              <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Linkedin className="w-5 h-5" />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+              <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Youtube className="w-5 h-5" />
+            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+              <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
           </div>
 
-          <div className="flex justify-center space-x-8 mb-8">
+          <div className="flex flex-wrap justify-center space-x-4 sm:space-x-8 mb-6 sm:mb-8">
             <Link href="/about" className="text-white/70 hover:text-white transition-colors text-sm">
               About
             </Link>
@@ -255,8 +257,8 @@ export default function About() {
             </Link>
           </div>
 
-          <div className="flex justify-center mb-8">
-            <Link href="/contact" className="px-8 py-3 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors">
+          <div className="flex justify-center mb-6 sm:mb-8">
+            <Link href="/contact" className="px-6 sm:px-8 py-2 sm:py-3 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors text-sm sm:text-base">
               Contact Us
             </Link>
           </div>

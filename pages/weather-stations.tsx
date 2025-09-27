@@ -116,28 +116,29 @@ export default function WeatherStations() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-transparent"></div>
 
         {/* Navigation */}
-        <nav className="relative z-20 flex items-center justify-between px-8 py-6">
-          <div className="flex items-center space-x-8">
+        <nav className="relative z-20 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex items-center space-x-4 sm:space-x-8">
             <Link href="/" className="flex items-center space-x-2 text-white">
-              <Leaf className="h-8 w-8" />
-              <span className="text-2xl font-bold">Klimacek</span>
+              <Leaf className="h-6 w-6 sm:h-8 sm:w-8" />
+              <span className="text-xl sm:text-2xl font-bold">Klimacek</span>
             </Link>
-            <Link href="/weather-stations" className="text-white font-medium">
-              Stasiun Cuaca
-            </Link>
-            <Link href="/products" className="text-white/90 hover:text-white transition-colors">
-              Produk Kami
-            </Link>
-            <Link href="/about" className="text-white/90 hover:text-white transition-colors">
-              Tentang Kami
-            </Link>
+            <div className="hidden md:flex space-x-6 lg:space-x-8">
+              <Link href="/weather-stations" className="text-white font-medium text-sm lg:text-base">
+                Stasiun Cuaca
+              </Link>
+              <Link href="/products" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                Produk Kami
+              </Link>
+              <Link href="/about" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                Tentang Kami
+              </Link>
+            </div>
           </div>
-
-          <div className="flex items-center space-x-4">
-            <Link href="/login" className="text-white/90 hover:text-white transition-colors">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link href="/login" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
               Login
             </Link>
-            <Link href="/signup" className="px-6 py-2 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors">
+            <Link href="/signup" className="px-3 py-1.5 sm:px-6 sm:py-2 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors text-sm lg:text-base">
               Sign Up
             </Link>
           </div>
@@ -148,101 +149,104 @@ export default function WeatherStations() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50 z-10"></div>
 
           {/* Search Bar */}
-          <div className="absolute top-4 left-4 right-4 z-20 flex items-center space-x-4">
-            <div className="flex-1 bg-white rounded-lg shadow-lg flex items-center px-4 py-2">
-              <Search className="w-5 h-5 text-gray-400 mr-2" />
+          <div className="absolute top-4 left-4 right-4 z-20 flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="flex-1 bg-white rounded-lg shadow-lg flex items-center px-3 sm:px-4 py-2">
+              <Search className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 mr-2 flex-shrink-0" />
               <input
                 type="text"
                 placeholder="Negara, kota, atau lokasi Anda..."
-                className="flex-1 outline-none text-gray-700"
+                className="flex-1 outline-none text-gray-700 text-sm sm:text-base"
               />
             </div>
-            <button className="p-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition">
-              <Info className="w-5 h-5 text-gray-600" />
-            </button>
-            <button className="p-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition">
-              <Settings className="w-5 h-5 text-gray-600" />
-            </button>
-            <button className="p-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition">
-              <div className="w-5 h-5 bg-gray-400 rounded"></div>
-            </button>
-            <button className="px-4 py-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition flex items-center space-x-2">
-              <Plus className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-700 font-medium">Menambahkan</span>
-            </button>
+            <div className="flex space-x-2 sm:space-x-4">
+              <button className="p-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition flex-shrink-0">
+                <Info className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
+              </button>
+              <button className="p-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition flex-shrink-0">
+                <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
+              </button>
+              <button className="p-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition flex-shrink-0">
+                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gray-400 rounded"></div>
+              </button>
+              <button className="px-3 sm:px-4 py-2 bg-white rounded-lg shadow-lg hover:bg-gray-50 transition flex items-center space-x-2 flex-shrink-0">
+                <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
+                <span className="text-gray-700 font-medium text-sm sm:text-base hidden sm:inline">Menambahkan</span>
+                <span className="text-gray-700 font-medium text-sm sm:text-base sm:hidden">Add</span>
+              </button>
+            </div>
           </div>
 
           {/* City Selector */}
-          <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 w-64">
-            <h3 className="font-semibold text-gray-800 mb-2">Kabupaten/Kota</h3>
+          <div className="absolute top-4 right-4 z-20 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-3 sm:p-4 w-48 sm:w-64 hidden lg:block">
+            <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">Kabupaten/Kota</h3>
             <div className="space-y-1">
               {cities.map((city) => (
                 <button
                   key={city}
                   onClick={() => setSelectedCity(city)}
-                  className={`w-full text-left px-3 py-2 rounded hover:bg-gray-100 transition ${
+                  className={`w-full text-left px-2 sm:px-3 py-1.5 sm:py-2 rounded hover:bg-gray-100 transition text-sm ${
                     selectedCity === city ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
                   }`}
                 >
                   {city}
                 </button>
               ))}
-              <button className="w-full text-left px-3 py-2 text-blue-600 hover:bg-gray-100 rounded transition">
+              <button className="w-full text-left px-2 sm:px-3 py-1.5 sm:py-2 text-blue-600 hover:bg-gray-100 rounded transition text-sm">
                 Kota Yogyakarta →
               </button>
             </div>
           </div>
 
           {/* Map */}
-          <div className="h-96 bg-cover bg-center relative" style={{ backgroundImage: 'url(/images/background-main-image.jpg)' }}>
+          <div className="h-64 sm:h-80 md:h-96 bg-cover bg-center relative" style={{ backgroundImage: 'url(/images/background-main-image.jpg)' }}>
             {/* Station Markers */}
             <div className="absolute inset-0">
-              <div className="absolute top-1/3 left-1/4 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <div className="absolute top-1/2 left-1/3 w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
-              <div className="absolute top-2/3 left-1/2 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+              <div className="absolute top-1/3 left-1/4 w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="absolute top-1/2 left-1/3 w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+              <div className="absolute top-2/3 left-1/2 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse"></div>
             </div>
           </div>
         </div>
 
         {/* Station Data Section */}
-        <div className="bg-gray-800 p-6">
+        <div className="bg-gray-800 p-4 sm:p-6">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-white text-xl font-semibold flex items-center">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-4">
+              <h2 className="text-white text-lg sm:text-xl font-semibold flex items-center mb-3 sm:mb-0">
                 {selectedStation}
-                <ChevronDown className="w-5 h-5 ml-2" />
+                <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </h2>
-              <div className="flex items-center space-x-6 text-white">
+              <div className="flex items-center justify-between sm:space-x-6 text-white">
                 <div className="text-center">
-                  <div className="text-2xl font-bold">0/8</div>
+                  <div className="text-xl sm:text-2xl font-bold">0/8</div>
                   <div className="text-xs text-gray-400">Sensor Aktif</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold">99.9 %</div>
+                  <div className="text-xl sm:text-2xl font-bold">99.9 %</div>
                   <div className="text-xs text-gray-400">Uptime</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold">1 min</div>
+                  <div className="text-xl sm:text-2xl font-bold">1 min</div>
                   <div className="text-xs text-gray-400">Interval Update</div>
                 </div>
               </div>
             </div>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
               {stationMetrics.map((metric, index) => (
-                <div key={index} className="bg-white rounded-lg p-4">
+                <div key={index} className="bg-white rounded-lg p-3 sm:p-4">
                   <div className="flex justify-between items-start mb-2">
                     <div>
                       <p className="text-xs text-gray-600">{metric.name}</p>
-                      <p className="text-2xl font-bold text-gray-800">
+                      <p className="text-lg sm:text-2xl font-bold text-gray-800">
                         {metric.value}{metric.unit}
                       </p>
                       <p className={`text-xs ${metric.change > 0 ? 'text-green-600' : 'text-red-600'}`}>
                         Normal: {metric.change > 0 ? '+' : ''}{metric.change}%
                       </p>
                     </div>
-                    <Cloud className="w-8 h-8 text-gray-400" />
+                    <Cloud className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" />
                   </div>
                   <div className="mt-2">
                     {renderSparkline(metric.graph)}
@@ -258,17 +262,17 @@ export default function WeatherStations() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex space-x-4">
-              <button className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
+            <div className="flex flex-wrap gap-2 sm:gap-4">
+              <button className="px-4 sm:px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition text-sm">
                 Unduh Data
               </button>
-              <button className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
+              <button className="px-4 sm:px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition text-sm">
                 Konfigurasi Peringatan
               </button>
-              <button className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
+              <button className="px-4 sm:px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition text-sm">
                 Kalibrasi Sensors
               </button>
-              <button className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
+              <button className="px-4 sm:px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition text-sm">
                 Lihat Report
               </button>
             </div>
@@ -276,20 +280,20 @@ export default function WeatherStations() {
         </div>
 
         {/* Weather Forecast Section */}
-        <div className="bg-gray-900 p-6">
+        <div className="bg-gray-900 p-4 sm:p-6">
           <div className="max-w-7xl mx-auto">
-            <h3 className="text-white text-lg font-semibold mb-4">Prakiraan Cuaca</h3>
-            <p className="text-gray-400 text-sm mb-4">Prediksi cuaca akurat untuk 18 jam ke depan</p>
+            <h3 className="text-white text-base sm:text-lg font-semibold mb-3 sm:mb-4">Prakiraan Cuaca</h3>
+            <p className="text-gray-400 text-sm mb-3 sm:mb-4">Prediksi cuaca akurat untuk 18 jam ke depan</p>
 
-            <div className="flex space-x-4 overflow-x-auto pb-4">
+            <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4">
               {weatherForecast.map((forecast, index) => (
-                <div key={index} className="flex-shrink-0 text-center">
+                <div key={index} className="flex-shrink-0 text-center min-w-[80px] sm:min-w-[90px]">
                   <p className="text-gray-400 text-xs mb-1">{forecast.time}</p>
-                  <div className="bg-gray-800 rounded-lg p-3">
-                    <div className="flex justify-center mb-2">
+                  <div className="bg-gray-800 rounded-lg p-2 sm:p-3">
+                    <div className="flex justify-center mb-1 sm:mb-2">
                       {getWeatherIcon(forecast.condition)}
                     </div>
-                    <p className="text-white text-sm font-semibold">{forecast.temp}°C</p>
+                    <p className="text-white text-xs sm:text-sm font-semibold">{forecast.temp}°C</p>
                     <p className="text-gray-400 text-xs mt-1">
                       {forecast.condition === 'rain' ? 'Hujan' :
                        forecast.condition === 'cloudy' ? 'Berawan' : 'Cerah'}
@@ -302,27 +306,27 @@ export default function WeatherStations() {
         </div>
 
         {/* Footer */}
-        <footer className="bg-black py-8 border-t border-gray-800">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex justify-center space-x-6 mb-6">
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Facebook className="w-5 h-5 text-white" />
+        <footer className="bg-black py-6 sm:py-8 border-t border-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-center space-x-4 sm:space-x-6 mb-4 sm:mb-6">
+              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Twitter className="w-5 h-5 text-white" />
+              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                <Twitter className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Instagram className="w-5 h-5 text-white" />
+              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Linkedin className="w-5 h-5 text-white" />
+              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Youtube className="w-5 h-5 text-white" />
+              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                <Youtube className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </a>
             </div>
 
-            <div className="flex justify-center space-x-8 mb-6">
+            <div className="flex flex-wrap justify-center space-x-4 sm:space-x-8 mb-4 sm:mb-6">
               <Link href="/about" className="text-gray-400 hover:text-white transition text-sm">
                 About
               </Link>
@@ -340,8 +344,8 @@ export default function WeatherStations() {
               </Link>
             </div>
 
-            <div className="flex justify-center mb-6">
-              <Link href="/contact" className="px-6 py-2 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition">
+            <div className="flex justify-center mb-4 sm:mb-6">
+              <Link href="/contact" className="px-4 sm:px-6 py-2 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition text-sm sm:text-base">
                 Contact Us
               </Link>
             </div>
