@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;600&display=swap');
+
+html, body {
+  background: #F4F1E7; /* beige background */
+  font-family: 'Poppins', sans-serif;
+  color: #6B4226; /* cokelat primary menggantikan hijau */
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
+  color: #8C5E3C; /* klimacek-brown-500 untuk heading */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input, textarea, button {
+  font-family: inherit;
+}
+
+.bg-beige {
+  background-color: #F4F1E7;
+}
