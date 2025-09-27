@@ -11,7 +11,7 @@
 
 ### Environment Variables (Updated in `.env.local`)
 ```
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyDYJpxwibPgJiH418xvjrLJXv_W6opaNbo
+NEXT_PUBLIC_FIREBASE_API_KEY=[REDACTED - Use environment variable]
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=atamagri-iot.firebaseapp.com
 NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://atamagri-iot-default-rtdb.asia-southeast1.firebasedatabase.app
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=atamagri-iot

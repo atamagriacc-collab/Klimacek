@@ -95,7 +95,7 @@ export default function Products() {
         'Baterai backup 72 jam',
         'Garansi 6 bulan'
       ],
-      image: '/images/klimastation.png'
+      image: '/images/p2mw 2.png'
     }
   ];
 
@@ -239,7 +239,7 @@ export default function Products() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div className="flex justify-center">
                     <img
-                      src={products[currentProductIndex].image || '/images/klimastation.png'}
+                      src={products[currentProductIndex].image || '/images/p2mw 2.png'}
                       alt={products[currentProductIndex].name}
                       className="w-64 h-auto"
                     />

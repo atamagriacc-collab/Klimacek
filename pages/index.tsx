@@ -60,7 +60,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="text-white space-y-6">
-              <h1 className="text-7xl font-bold leading-tight">
+              <h1 className="text-7xl font-bold leading-tight text-white">
                 Part of Future<br />
                 Indonesia
               </h1>

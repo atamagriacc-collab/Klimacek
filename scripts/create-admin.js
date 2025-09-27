@@ -6,7 +6,7 @@ const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const readline = require('readline');
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyAl0tpMNAA_g0FPfJhPPRrOT7EAYKgGleQ",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "[REDACTED - Use environment variable]",
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "atamagri-cc5c1.firebaseapp.com",
   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "https://atamagri-cc5c1-default-rtdb.firebaseio.com",
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "atamagri-cc5c1",
