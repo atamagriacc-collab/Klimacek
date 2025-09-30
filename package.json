@@ -83,6 +83,7 @@
   },
   "devDependencies": {
     "@types/grecaptcha": "^3.0.9",
+    "@types/leaflet": "^1.9.20",
     "@types/node": "^22",
     "@types/nodemailer": "^6.4.12",
     "@types/react": "^19",
