@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Funnel -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M30,20 L70,20 L60,40 L40,40z"/>
+    
+    <!-- Container -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M40,40h20v35h-20z"/>
+    
+    <!-- Water level -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M42,60h16v13h-16z"/>
+    
+    <!-- Measurement marks -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M38,50h4v1h-4z M38,55h4v1h-4z M38,60h4v1h-4z M38,65h4v1h-4z M38,70h4v1h-4z"/>
+    
+    <!-- Digital display -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M45,45h10v8h-10z"/>
+    
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M47,48h6v2h-6z"/>
+</vector>

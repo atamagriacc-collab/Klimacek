@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#A1887F"
+        android:pathData="M0,0h100v100h-100z"/>
+
+    <!-- Compost pile -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M20,60 L80,60 L70,80 L30,80z"/>
+
+    <!-- Organic matter -->
+    <path
+        android:fillColor="#689F38"
+        android:pathData="M30,50 L35,60 L40,50z"/>
+
+    <path
+        android:fillColor="#FFA726"
+        android:pathData="M45,52 L50,60 L55,52z"/>
+
+    <path
+        android:fillColor="#689F38"
+        android:pathData="M60,50 L65,60 L70,50z"/>
+
+    <!-- Sun -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M 75,25 m -8,0 a 8,8 0 1,1 16,0 a 8,8 0 1,1 -16,0"/>
+</vector>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M0,0h100v100h-100z"/>
+
+    <!-- Soil layers -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M0,30h100v20h-100z"/>
+
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M0,50h100v25h-100z"/>
+
+    <path
+        android:fillColor="#4E342E"
+        android:pathData="M0,75h100v25h-100z"/>
+
+    <!-- Plant -->
+    <path
+        android:fillColor="#689F38"
+        android:pathData="M45,25 L45,35 Q45,40 40,40 Q35,40 35,35 L35,25z"/>
+
+    <path
+        android:fillColor="#689F38"
+        android:pathData="M55,25 L55,35 Q55,40 60,40 Q65,40 65,35 L65,25z"/>
+
+    <path
+        android:fillColor="#558B2F"
+        android:pathData="M48,30h4v20h-4z"/>
+</vector>

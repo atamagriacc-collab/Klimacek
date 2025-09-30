@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Klimacek</string>
+    <string name="logo_description">Klimacek Logo</string>
+    <string name="title_text">Klimacek</string>
+    <string name="subtitle_text">Platform Pemantauan Iklim Cuaca dan Rekomendasi Keputusan Berbasis IoT dan AI</string>
+    <string name="login_button_text">Masuk</string>
+</resources>

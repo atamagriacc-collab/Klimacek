@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Sensor body -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M40,20h20v25h-20z"/>
+    
+    <!-- Display screen -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M43,23h14v10h-14z"/>
+    
+    <!-- Display text -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M45,26h10v1h-10z M45,29h10v1h-10z"/>
+    
+    <!-- Probe -->
+    <path
+        android:fillColor="#616161"
+        android:pathData="M48,45h4v35h-4z"/>
+    
+    <!-- Probe tip -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M48,80 L50,85 L52,80z"/>
+    
+    <!-- Wireless indicator -->
+    <path
+        android:fillColor="#2196F3"
+        android:strokeWidth="2"
+        android:strokeColor="#2196F3"
+        android:pathData="M 45,38 Q45,35 48,35 Q51,35 51,38 M 42,40 Q42,33 50,33 Q58,33 58,40"/>
+</vector>

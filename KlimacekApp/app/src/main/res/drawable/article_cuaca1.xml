@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Sky Background -->
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M0,0h100v100h-100z"/>
+
+    <!-- Sun -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M 25,25 m -12,0 a 12,12 0 1,1 24,0 a 12,12 0 1,1 -24,0"/>
+
+    <!-- Clouds -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M 65,30 m -8,0 a 8,8 0 1,1 16,0 a 8,8 0 1,1 -16,0"/>
+
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M 75,30 m -10,0 a 10,10 0 1,1 20,0 a 10,10 0 1,1 -20,0"/>
+
+    <path
+        android:fillColor="#90A4AE"
+        android:pathData="M60,38h25v2h-25z"/>
+
+    <!-- Rain cloud -->
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M 35,55 m -10,0 a 10,10 0 1,1 20,0 a 10,10 0 1,1 -20,0"/>
+
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M 45,55 m -12,0 a 12,12 0 1,1 24,0 a 12,12 0 1,1 -24,0"/>
+
+    <!-- Rain drops -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M30,68v8 M35,65v8 M40,68v8 M45,65v8 M50,68v8"
+        android:strokeWidth="2"
+        android:strokeColor="#2196F3"/>
+
+    <!-- Ground -->
+    <path
+        android:fillColor="#8BC34A"
+        android:pathData="M0,80h100v20h-100z"/>
+</vector>

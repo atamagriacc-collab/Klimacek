@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Background gradient effect -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M0,0h100v50h-100z"/>
+
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M0,50h100v50h-100z"/>
+
+    <!-- Thermometer -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M45,20h10v40h-10z"/>
+
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M47,40h6v18h-6z"/>
+
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 50,65 m -8,0 a 8,8 0 1,1 16,0 a 8,8 0 1,1 -16,0"/>
+
+    <!-- Extreme weather symbols -->
+    <!-- Lightning -->
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M20,30 L25,40 L22,40 L27,50 L22,38 L25,38z"/>
+
+    <!-- Strong wind lines -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF"
+        android:pathData="M70,30h15 M72,35h13 M70,40h15"/>
+
+    <!-- Drought cracked ground -->
+    <path
+        android:fillColor="#795548"
+        android:pathData="M0,80h100v20h-100z"/>
+
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M20,82v16 M40,81v18 M60,82v16 M80,81v18"/>
+</vector>

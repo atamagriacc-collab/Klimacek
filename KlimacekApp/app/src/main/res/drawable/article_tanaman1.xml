@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Sky Background -->
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M0,0h100v100h-100z"/>
+
+    <!-- Rice field -->
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M0,70h100v30h-100z"/>
+
+    <!-- Rice plants -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M10,60h2v15h-2z M15,58h2v17h-2z M20,60h2v15h-2z"/>
+
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M9,58h4v4h-4z M14,56h4v4h-4z M19,58h4v4h-4z"/>
+
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M30,60h2v15h-2z M35,58h2v17h-2z M40,60h2v15h-2z"/>
+
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M29,58h4v4h-4z M34,56h4v4h-4z M39,58h4v4h-4z"/>
+
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M50,60h2v15h-2z M55,58h2v17h-2z M60,60h2v15h-2z"/>
+
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M49,58h4v4h-4z M54,56h4v4h-4z M59,58h4v4h-4z"/>
+
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M70,60h2v15h-2z M75,58h2v17h-2z M80,60h2v15h-2z"/>
+
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M69,58h4v4h-4z M74,56h4v4h-4z M79,58h4v4h-4z"/>
+
+    <!-- Sun -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M 75,20 m -10,0 a 10,10 0 1,1 20,0 a 10,10 0 1,1 -20,0"/>
+</vector>

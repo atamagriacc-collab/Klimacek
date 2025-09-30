@@ -46,15 +46,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            <Link href="/login" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
-              Login
-            </Link>
-            <Link href="/signup" className="px-3 py-1.5 sm:px-6 sm:py-2 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors text-sm lg:text-base">
-              Sign Up
-            </Link>
-          </div>
         </nav>
 
         {/* Main Content */}

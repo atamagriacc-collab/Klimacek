@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Panel frame -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M20,30h60v40h-60z"/>
+    
+    <!-- Solar cells grid -->
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M22,32h56v36h-56z"/>
+    
+    <!-- Grid lines -->
+    <path
+        android:strokeWidth="1"
+        android:strokeColor="#0D47A1"
+        android:pathData="M30,32v36 M38,32v36 M46,32v36 M54,32v36 M62,32v36 M70,32v36 M22,40h56 M22,48h56 M22,56h56 M22,64h56"/>
+    
+    <!-- Stand -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M48,70h4v10h-4z M40,78h20v2h-20z"/>
+    
+    <!-- Connection box -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M43,25h14v5h-14z"/>
+</vector>

@@ -9,7 +9,7 @@ export default function AdminRoute({ children }: { children: React.ReactNode }) 
   useEffect(() => {
     if (!loading) {
       if (!user) {
-        router.push('/login');
+        router.push('/');
       } else if (!isAdmin) {
         router.push('/dashboard');
       }

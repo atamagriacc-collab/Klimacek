@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Device body -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M35,30h30v40h-30z"/>
+    
+    <!-- UV sensor dome -->
+    <path
+        android:fillColor="#9C27B0"
+        android:pathData="M 50,25 m -10,0 a 10,10 0 1,1 20,0 a 10,10 0 1,1 -20,0"/>
+    
+    <!-- Display -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M40,40h20v15h-20z"/>
+    
+    <!-- UV Index display -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M42,43h16v2h-16z"/>
+    <path
+        android:fillColor="#FFEB3B"
+        android:pathData="M42,47h10v2h-10z"/>
+    <path
+        android:fillColor="#FF5722"
+        android:pathData="M42,51h6v2h-6z"/>
+    
+    <!-- Buttons -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M 43,62 m -2,0 a 2,2 0 1,1 4,0 a 2,2 0 1,1 -4,0"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M 50,62 m -2,0 a 2,2 0 1,1 4,0 a 2,2 0 1,1 -4,0"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M 57,62 m -2,0 a 2,2 0 1,1 4,0 a 2,2 0 1,1 -4,0"/>
+</vector>

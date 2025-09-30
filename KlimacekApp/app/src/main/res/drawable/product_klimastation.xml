@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Pole -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M48,20h4v60h-4z"/>
+
+    <!-- Solar Panel -->
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M35,15h30v8h-30z"/>
+
+    <path
+        android:fillColor="#0D47A1"
+        android:pathData="M37,16v6 M40,16v6 M43,16v6 M46,16v6 M49,16v6 M52,16v6 M55,16v6 M58,16v6 M61,16v6"
+        android:strokeWidth="0.5"
+        android:strokeColor="#FFFFFF"/>
+
+    <!-- Sensor Box -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M40,30h20v15h-20z"/>
+
+    <path
+        android:fillColor="#212121"
+        android:pathData="M42,33h4v3h-4z M47,33h4v3h-4z M52,33h4v3h-4z M42,38h4v3h-4z M47,38h4v3h-4z M52,38h4v3h-4z"/>
+
+    <!-- Wind Vane -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M48,25h4v2h-4z"/>
+
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 35,26 L40,24 L40,28z"/>
+
+    <path
+        android:fillColor="#616161"
+        android:pathData="M52,24h13v4h-13z"/>
+
+    <!-- Anemometer Cups -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M 50,50 m -8,0 a 8,8 0 1,1 16,0 a 8,8 0 1,1 -16,0"/>
+
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M45,50h10 M50,45v10"
+        android:strokeWidth="2"
+        android:strokeColor="#616161"/>
+
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 45,50 m -3,0 a 3,3 0 1,1 6,0 a 3,3 0 1,1 -6,0"/>
+
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 55,50 m -3,0 a 3,3 0 1,1 6,0 a 3,3 0 1,1 -6,0"/>
+
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 50,45 m -3,0 a 3,3 0 1,1 6,0 a 3,3 0 1,1 -6,0"/>
+
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 50,55 m -3,0 a 3,3 0 1,1 6,0 a 3,3 0 1,1 -6,0"/>
+
+    <!-- Rain Gauge -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M58,35h8v12h-8z"/>
+
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M59,42h6v4h-6z"/>
+
+    <!-- Base -->
+    <path
+        android:fillColor="#616161"
+        android:pathData="M45,78h10v4h-10z"/>
+</vector>

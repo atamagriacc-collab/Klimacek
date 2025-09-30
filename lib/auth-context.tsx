@@ -22,15 +22,34 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-const auth = getAuth(app);
+// Check if Firebase config is valid
+const hasValidFirebaseConfig = !!(firebaseConfig.apiKey && firebaseConfig.projectId);
 
-// Initialize Analytics (only in browser)
-if (typeof window !== 'undefined') {
+let app: any = null;
+let auth: any = null;
+
+// Initialize Firebase only if config is valid
+if (hasValidFirebaseConfig) {
+  try {
+    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+    auth = getAuth(app);
+  } catch (error) {
+    console.warn('Firebase Auth initialization failed:', error);
+    // Continue without auth - allows the app to run
+  }
+} else {
+  console.warn('Firebase configuration is missing or incomplete. Auth features will be disabled.');
+}
+
+// Initialize Analytics (only in browser and if app is initialized)
+if (typeof window !== 'undefined' && app) {
   isSupported().then((supported) => {
     if (supported) {
-      getAnalytics(app);
+      try {
+        getAnalytics(app);
+      } catch (error) {
+        console.warn('Analytics initialization failed:', error);
+      }
     }
   });
 }
@@ -62,6 +81,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const router = useRouter();
 
   useEffect(() => {
+    // If auth is not initialized, set loading to false and return
+    if (!auth) {
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
 
@@ -96,6 +121,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signIn = async (email: string, password: string) => {
+    if (!auth) {
+      throw new Error('Firebase Auth is not configured. Please check your environment variables.');
+    }
     try {
       await signInWithEmailAndPassword(auth, email, password);
       router.push('/dashboard');
@@ -106,6 +134,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signUp = async (email: string, password: string) => {
+    if (!auth) {
+      throw new Error('Firebase Auth is not configured. Please check your environment variables.');
+    }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       router.push('/dashboard');
@@ -116,6 +147,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const createUser = async (email: string, password: string) => {
+    if (!auth) {
+      throw new Error('Firebase Auth is not configured. Please check your environment variables.');
+    }
     try {
       // Store current user info
       const currentUser = auth.currentUser;
@@ -131,7 +165,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (currentUser && currentUser.email) {
         // Admin will need to re-authenticate after creating a user
         // This is a limitation of client-side user creation
-        router.push('/login?message=User created successfully. Please sign in again.');
+        router.push('/');
       }
 
     } catch (error) {
@@ -141,6 +175,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
+    if (!auth) {
+      router.push('/login');
+      return;
+    }
     try {
       await signOut(auth);
       router.push('/login');

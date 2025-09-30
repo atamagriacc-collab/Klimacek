@@ -12,9 +12,8 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Check if we have required Firebase configuration
+// Check if we have minimum required Firebase configuration for database
 const hasFirebaseConfig = !!(
-  firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
   firebaseConfig.databaseURL
 );
@@ -38,7 +37,11 @@ if (typeof window !== 'undefined' && hasFirebaseConfig) {
     hasProjectId: !!firebaseConfig.projectId,
     hasDatabaseURL: !!firebaseConfig.databaseURL
   });
-  clientDB = getDB();
+  try {
+    clientDB = getDB();
+  } catch (error) {
+    console.warn('Failed to initialize Firebase client database:', error);
+  }
 }
 
 // For server-side use (only when Firebase config is available)

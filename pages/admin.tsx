@@ -92,7 +92,7 @@ export default function Admin() {
       // Note: Admin will need to re-login due to Firebase limitation
       setTimeout(() => {
         setSuccess('User created! You need to sign in again for security.');
-        router.push('/login');
+        router.push('/');
       }, 2000);
 
     } catch (error: any) {

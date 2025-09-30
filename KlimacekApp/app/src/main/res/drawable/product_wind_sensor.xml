@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Center axis -->
+    <path
+        android:fillColor="#616161"
+        android:pathData="M 50,50 m -4,0 a 4,4 0 1,1 8,0 a 4,4 0 1,1 -8,0"/>
+    
+    <!-- Arms -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M46,50h-20v2h20z M54,50h20v-2h-20z M50,46v-20h-2v20z"/>
+    
+    <!-- Cups -->
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 26,50 Q20,48 20,52 Q20,56 26,54z"/>
+    
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 74,50 Q80,48 80,52 Q80,56 74,54z"/>
+    
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M 50,26 Q48,20 52,20 Q56,20 54,26z"/>
+    
+    <!-- Base pole -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M48,52h4v28h-4z"/>
+    
+    <!-- Base -->
+    <path
+        android:fillColor="#616161"
+        android:pathData="M45,78h10v4h-10z"/>
+</vector>
