@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, CircleMarker } from 'react-leaflet';
+import type { LatLngExpression } from 'leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -25,7 +26,7 @@ const SENSOR_LOCATION = {
 };
 
 // Component to update map center when coordinates change
-function ChangeView({ center, zoom }: { center: [number, number]; zoom: number }) {
+function ChangeView({ center, zoom }: { center: LatLngExpression; zoom: number }) {
   const map = useMap();
   useEffect(() => {
     map.setView(center, zoom);
@@ -34,21 +35,24 @@ function ChangeView({ center, zoom }: { center: [number, number]; zoom: number }
 }
 
 export default function WeatherMap({ latitude, longitude, stationName }: WeatherMapProps) {
-  const position: [number, number] = [latitude, longitude];
-  const sensorPosition: [number, number] = [SENSOR_LOCATION.lat, SENSOR_LOCATION.lng];
+  const position: LatLngExpression = [latitude, longitude];
+  const sensorPosition: LatLngExpression = [SENSOR_LOCATION.lat, SENSOR_LOCATION.lng];
 
   // Check if this is Surakarta station
   const isSurakarta = stationName.toLowerCase().includes('surakarta');
 
+  const mapCenter: LatLngExpression = isSurakarta ? sensorPosition : position;
+  const mapZoom = isSurakarta ? 14 : 13;
+
   return (
     <MapContainer
-      center={isSurakarta ? sensorPosition : position}
-      zoom={isSurakarta ? 14 : 13}
+      center={mapCenter}
+      zoom={mapZoom}
       scrollWheelZoom={false}
       style={{ height: '100%', width: '100%' }}
       className="z-10"
     >
-      <ChangeView center={isSurakarta ? sensorPosition : position} zoom={isSurakarta ? 14 : 13} />
+      <ChangeView center={mapCenter} zoom={mapZoom} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
