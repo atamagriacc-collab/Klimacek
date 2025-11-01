@@ -3,6 +3,7 @@ package com.klimacek.app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,8 +17,10 @@ public class ArticleActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArticleAdapter articleAdapter;
     private List<Article> articleList;
+    private List<Article> allArticleList;
     private ImageView backButton;
     private TextView titleText;
+    private String selectedCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +30,11 @@ public class ArticleActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_article);
+
+        // Get category from intent
+        Intent intent = getIntent();
+        selectedCategory = intent.getStringExtra("category");
 
         initializeViews();
         setupArticles();
@@ -42,14 +46,21 @@ public class ArticleActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewArticles);
         backButton = findViewById(R.id.backButton);
         titleText = findViewById(R.id.titleText);
-        titleText.setText("Articles");
+
+        // Set title based on category
+        if (selectedCategory != null) {
+            titleText.setText("Artikel " + selectedCategory);
+        } else {
+            titleText.setText("Semua Artikel");
+        }
     }
 
     private void setupArticles() {
-        articleList = new ArrayList<>();
+        // Create all articles list
+        allArticleList = new ArrayList<>();
 
         // Tanah category articles
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Tanah",
             "Cara Mengolah Tanah Liat",
             "Tanah liat memiliki karakteristik yang unik dan memerlukan penanganan khusus untuk pertanian. Pelajari teknik pengolahan tanah liat yang efektif untuk meningkatkan produktivitas lahan Anda.",
@@ -57,7 +68,7 @@ public class ArticleActivity extends AppCompatActivity {
             "Tanah"
         ));
 
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Tanah",
             "Meningkatkan Kesuburan Tanah Organik",
             "Metode alami untuk meningkatkan kesuburan tanah menggunakan bahan organik. Temukan cara membuat kompos yang berkualitas dan teknik aplikasi yang tepat.",
@@ -66,7 +77,7 @@ public class ArticleActivity extends AppCompatActivity {
         ));
 
         // Tanaman category articles
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Tanaman",
             "Teknik Budidaya Padi Modern",
             "Pelajari metode terbaru dalam budidaya padi yang efisien dan ramah lingkungan. Dari pemilihan bibit hingga panen, semua dijelaskan secara detail.",
@@ -74,7 +85,7 @@ public class ArticleActivity extends AppCompatActivity {
             "Tanaman"
         ));
 
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Tanaman",
             "Panduan Menanam Sayuran Hidroponik",
             "Hidroponik menjadi solusi pertanian modern di lahan terbatas. Ikuti panduan lengkap memulai kebun hidroponik Anda sendiri.",
@@ -83,7 +94,7 @@ public class ArticleActivity extends AppCompatActivity {
         ));
 
         // Cuaca category articles
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Cuaca",
             "Memahami Pola Cuaca untuk Pertanian",
             "Cuaca berperan penting dalam keberhasilan pertanian. Pelajari cara membaca pola cuaca dan memanfaatkannya untuk meningkatkan hasil panen.",
@@ -91,7 +102,7 @@ public class ArticleActivity extends AppCompatActivity {
             "Cuaca"
         ));
 
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Cuaca",
             "Adaptasi Perubahan Iklim di Sektor Pertanian",
             "Strategi adaptasi menghadapi perubahan iklim global. Temukan solusi praktis untuk menjaga produktivitas pertanian di tengah tantangan cuaca ekstrem.",
@@ -100,7 +111,7 @@ public class ArticleActivity extends AppCompatActivity {
         ));
 
         // Hama category articles
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Hama",
             "Pengendalian Hama Terpadu",
             "Metode pengendalian hama yang efektif dan ramah lingkungan. Kombinasi teknik biologis, mekanis, dan kimia untuk hasil optimal.",
@@ -108,13 +119,26 @@ public class ArticleActivity extends AppCompatActivity {
             "Hama"
         ));
 
-        articleList.add(new Article(
+        allArticleList.add(new Article(
             "Hama",
             "Identifikasi Hama dan Penyakit Tanaman",
             "Panduan lengkap mengenali berbagai jenis hama dan penyakit tanaman. Dilengkapi dengan foto dan cara penanganannya.",
             R.drawable.article_hama2,
             "Hama"
         ));
+
+        // Filter articles based on selected category
+        articleList = new ArrayList<>();
+        if (selectedCategory != null && !selectedCategory.isEmpty()) {
+            for (Article article : allArticleList) {
+                if (article.getCategory().equals(selectedCategory)) {
+                    articleList.add(article);
+                }
+            }
+        } else {
+            // If no category selected, show all articles
+            articleList.addAll(allArticleList);
+        }
     }
 
     private void setupRecyclerView() {

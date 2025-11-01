@@ -77,28 +77,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text=" Intensitas Cahaya"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Intensitas Cahaya"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartIntensitasCahaya"
@@ -125,28 +111,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text=" Kelembapan"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Kelembapan"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartKelembapan"
@@ -182,28 +154,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text=" Temperatur Suhu"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Temperatur Suhu"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartTemperatur"
@@ -230,28 +188,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text=" Curah Hujan"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Curah Hujan"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartCurahHujan"
@@ -287,28 +231,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text="⚡ Tegangan\nPanel Surya"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Tegangan Panel Surya"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartTegangan"
@@ -335,28 +265,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text="⚡ Arus\nPanel Surya"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Arus Panel Surya"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartArus"
@@ -392,28 +308,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text="💡 Watt\nPanel Surya"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Watt Panel Surya"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartWatt"
@@ -440,28 +342,14 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="8dp">
-
-                            <View
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/circle_yellow" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:text=" Kecepatan Angin"
-                                android:textColor="#333333"
-                                android:textSize="12sp"
-                                android:layout_marginStart="8dp" />
-
-                        </LinearLayout>
+                            android:text="Kecepatan Angin"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="8dp" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartKecepatanAngin"

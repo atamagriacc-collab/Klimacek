@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -40,6 +41,9 @@ public class DashboardActivity extends AppCompatActivity {
     private int dataIndex = 0;
     private boolean isRunning = true;
 
+    private ApiClient apiClient;
+    private ArrayList<Long> timestamps = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +52,9 @@ public class DashboardActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_dashboard);
 
+        apiClient = new ApiClient();
         initializeViews();
         setupCharts();
         setupClickListeners();
@@ -83,15 +85,6 @@ public class DashboardActivity extends AppCompatActivity {
         setupLineChart(chartWatt, "Watt", 0, 60);
         setupLineChart(chartKecepatanAngin, "Kecepatan Angin", 0, 60);
 
-        // Initialize with sample data
-        updateChart(chartIntensitasCahaya, generateInitialData());
-        updateChart(chartKelembapan, generateInitialData());
-        updateChart(chartTemperatur, generateInitialTemperatureData());
-        updateChart(chartCurahHujan, generateInitialData());
-        updateChart(chartTegangan, generateInitialData());
-        updateChart(chartArus, generateInitialData());
-        updateChart(chartWatt, generateInitialData());
-        updateChart(chartKecepatanAngin, generateInitialData());
     }
 
     private void setupLineChart(LineChart chart, String label, float minY, float maxY) {
@@ -102,16 +95,17 @@ public class DashboardActivity extends AppCompatActivity {
         chart.setScaleEnabled(false);
         chart.setPinchZoom(false);
         chart.setBackgroundColor(Color.WHITE);
-        chart.setNoDataText("Loading...");
+        chart.setNoDataText("");
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(true);
         xAxis.setGridColor(Color.parseColor("#E0E0E0"));
         xAxis.setTextColor(Color.parseColor("#757575"));
-        xAxis.setTextSize(10f);
-        xAxis.setLabelCount(7, true);
+        xAxis.setTextSize(9f);
+        xAxis.setLabelCount(4, true);
         xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(new TimeAxisFormatter(10 * 60 * 1000L)); // 10 minutes format (HH:mm)
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setDrawGridLines(true);
@@ -125,24 +119,6 @@ public class DashboardActivity extends AppCompatActivity {
         chart.getAxisRight().setEnabled(false);
         chart.getLegend().setEnabled(false);
         chart.animateX(500);
-    }
-
-    private ArrayList<Entry> generateInitialData() {
-        ArrayList<Entry> entries = new ArrayList<>();
-        for (int i = 0; i <= 6; i++) {
-            float value = 15 + random.nextFloat() * 30;
-            entries.add(new Entry(i, value));
-        }
-        return entries;
-    }
-
-    private ArrayList<Entry> generateInitialTemperatureData() {
-        ArrayList<Entry> entries = new ArrayList<>();
-        for (int i = 0; i <= 6; i++) {
-            float value = 25 + random.nextFloat() * 10;
-            entries.add(new Entry(i, value));
-        }
-        return entries;
     }
 
     private void updateChart(LineChart chart, ArrayList<Entry> entries) {
@@ -245,48 +221,83 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (isRunning) {
-                    dataIndex++;
-
-                    // Update each chart with new random data point
-                    addDataPoint(chartIntensitasCahaya, 15 + random.nextFloat() * 30);
-                    addDataPoint(chartKelembapan, 30 + random.nextFloat() * 30);
-                    addDataPoint(chartTemperatur, 25 + random.nextFloat() * 10);
-                    addDataPoint(chartCurahHujan, 10 + random.nextFloat() * 30);
-                    addDataPoint(chartTegangan, 15 + random.nextFloat() * 30);
-                    addDataPoint(chartArus, 20 + random.nextFloat() * 25);
-                    addDataPoint(chartWatt, 10 + random.nextFloat() * 30);
-                    addDataPoint(chartKecepatanAngin, 15 + random.nextFloat() * 30);
-
+                    fetchSensorData();
                     // Repeat every 2 seconds
                     handler.postDelayed(this, 2000);
                 }
             }
-        }, 2000);
+        }, 500); // Start after 500ms
     }
 
-    private void addDataPoint(LineChart chart, float value) {
-        LineData data = chart.getData();
-        if (data != null) {
-            LineDataSet set = (LineDataSet) data.getDataSetByIndex(0);
-            if (set != null) {
-                // Keep only last 7 points
-                if (set.getEntryCount() >= 7) {
-                    set.removeFirst();
-                    // Re-index entries
-                    for (int i = 0; i < set.getEntryCount(); i++) {
-                        Entry entry = set.getEntryForIndex(i);
-                        entry.setX(i);
-                    }
-                }
+    private void fetchSensorData() {
+        apiClient.getSensorData(null, 7, new ApiClient.ApiCallback() {
+            @Override
+            public void onSuccess(ApiResponse response) {
+                if (response.getData() != null && !response.getData().isEmpty()) {
+                    List<SensorData> dataList = response.getData();
 
-                // Add new entry
-                set.addEntry(new Entry(set.getEntryCount(), value));
-                data.notifyDataChanged();
-                chart.notifyDataSetChanged();
-                chart.invalidate();
+                    // Clear existing data
+                    timestamps.clear();
+
+                    // Prepare entries for all charts
+                    ArrayList<Entry> entriesLight = new ArrayList<>();
+                    ArrayList<Entry> entriesHumidity = new ArrayList<>();
+                    ArrayList<Entry> entriesTemp = new ArrayList<>();
+                    ArrayList<Entry> entriesRain = new ArrayList<>();
+                    ArrayList<Entry> entriesVoltage = new ArrayList<>();
+                    ArrayList<Entry> entriesCurrent = new ArrayList<>();
+                    ArrayList<Entry> entriesPower = new ArrayList<>();
+                    ArrayList<Entry> entriesWind = new ArrayList<>();
+
+                    // Process data in reverse order (oldest to newest)
+                    for (int i = dataList.size() - 1; i >= 0; i--) {
+                        SensorData data = dataList.get(i);
+                        long timestamp = parseTimestamp(data.getReceivedAt());
+                        float xValue = timestamp / 1000f; // Convert to seconds for X-axis
+
+                        timestamps.add(timestamp);
+
+                        entriesLight.add(new Entry(xValue, data.getLightLux()));
+                        entriesHumidity.add(new Entry(xValue, data.getHumidity()));
+                        entriesTemp.add(new Entry(xValue, data.getTemperatureC()));
+                        entriesRain.add(new Entry(xValue, data.getRainrateMmh()));
+                        entriesVoltage.add(new Entry(xValue, data.getSolVoltageV()));
+                        entriesCurrent.add(new Entry(xValue, data.getSolCurrentMa()));
+                        entriesPower.add(new Entry(xValue, data.getSolPowerW()));
+                        entriesWind.add(new Entry(xValue, data.getWindKmh()));
+                    }
+
+                    // Update all charts
+                    updateChart(chartIntensitasCahaya, entriesLight);
+                    updateChart(chartKelembapan, entriesHumidity);
+                    updateChart(chartTemperatur, entriesTemp);
+                    updateChart(chartCurahHujan, entriesRain);
+                    updateChart(chartTegangan, entriesVoltage);
+                    updateChart(chartArus, entriesCurrent);
+                    updateChart(chartWatt, entriesPower);
+                    updateChart(chartKecepatanAngin, entriesWind);
+                }
             }
+
+            @Override
+            public void onError(String error) {
+                android.util.Log.e("DashboardActivity", "Error fetching sensor data: " + error);
+            }
+        });
+    }
+
+    private long parseTimestamp(String receivedAt) {
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", java.util.Locale.US);
+            sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+            java.util.Date date = sdf.parse(receivedAt);
+            return date != null ? date.getTime() : System.currentTimeMillis();
+        } catch (Exception e) {
+            android.util.Log.e("DashboardActivity", "Error parsing timestamp: " + receivedAt, e);
+            return System.currentTimeMillis();
         }
     }
+
 
     @Override
     protected void onDestroy() {

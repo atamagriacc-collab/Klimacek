@@ -14,16 +14,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         // Hide action bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        
-        // Make full screen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        
+
         setContentView(R.layout.activity_main);
         
         Button loginButton = findViewById(R.id.loginButton);

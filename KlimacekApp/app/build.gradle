@@ -11,23 +11,59 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // BuildConfig fields for API configuration
+        buildConfigField "String", "API_BASE_URL", "\"https://api.klimacek.com\""
+        buildConfigField "String", "SENSOR_DATA_ENDPOINT", "\"/api/iot/sensor-data\""
+    }
+
+    signingConfigs {
+        // TODO: Create release keystore and configure signing
+        // Uncomment and configure after creating keystore
+        /*
+        release {
+            storeFile file("path/to/your/release-keystore.jks")
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: project.findProperty("keystorePassword")
+            keyAlias System.getenv("KEY_ALIAS") ?: project.findProperty("keyAlias")
+            keyPassword System.getenv("KEY_PASSWORD") ?: project.findProperty("keyPassword")
+        }
+        */
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            // Use localhost for debug builds (emulator)
+            buildConfigField "String", "API_BASE_URL", "\"http://10.0.2.2:3002\""
+            buildConfigField "String", "SENSOR_DATA_ENDPOINT", "\"/api/iot/sensor-data\""
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // TODO: Uncomment after configuring signingConfigs
+            // signingConfig signingConfigs.release
+
+            // Production API URL
+            buildConfigField "String", "API_BASE_URL", "\"https://api.klimacek.com\""
+            buildConfigField "String", "SENSOR_DATA_ENDPOINT", "\"/api/iot/sensor-data\""
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
@@ -37,6 +73,11 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // HTTP Client
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

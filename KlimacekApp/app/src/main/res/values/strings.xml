@@ -5,4 +5,13 @@
     <string name="title_text">Klimacek</string>
     <string name="subtitle_text">Platform Pemantauan Iklim Cuaca dan Rekomendasi Keputusan Berbasis IoT dan AI</string>
     <string name="login_button_text">Masuk</string>
+
+    <!-- Time Range Options -->
+    <string-array name="time_range_options">
+        <item>5 Menit Terakhir</item>
+        <item>10 Menit Terakhir</item>
+        <item>1 Hari Terakhir</item>
+        <item>7 Hari Terakhir</item>
+        <item>30 Hari Terakhir</item>
+    </string-array>
 </resources>

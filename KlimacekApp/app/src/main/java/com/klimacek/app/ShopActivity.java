@@ -5,13 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +19,8 @@ public class ShopActivity extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private List<Product> productList;
     private ImageView backButton;
-    private ImageView profileIcon;
     private TextView titleText;
     private BottomNavigationView bottomNavigation;
-    private TextView cartBadge;
-    private int cartItemCount = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +30,6 @@ public class ShopActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_shop);
 
         initializeViews();
@@ -46,16 +37,14 @@ public class ShopActivity extends AppCompatActivity {
         setupRecyclerView();
         setupClickListeners();
         setupBottomNavigation();
-        updateCartBadge();
     }
 
     private void initializeViews() {
         recyclerView = findViewById(R.id.recyclerViewProducts);
         backButton = findViewById(R.id.backButton);
-        profileIcon = findViewById(R.id.profileIcon);
         titleText = findViewById(R.id.titleText);
         bottomNavigation = findViewById(R.id.bottomNavigationShop);
-        titleText.setText("Shop");
+        titleText.setText("Market");
     }
 
     private void setupProducts() {
@@ -140,50 +129,23 @@ public class ShopActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-        profileIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ShopActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void setupBottomNavigation() {
-        bottomNavigation.setSelectedItemId(R.id.navigation_shop_cart);
+        bottomNavigation.setSelectedItemId(R.id.navigation_market);
 
         bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.navigation_shop_home) {
+            if (itemId == R.id.navigation_home) {
                 Intent intent = new Intent(ShopActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
-            } else if (itemId == R.id.navigation_shop_search) {
-                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
-                return true;
-            } else if (itemId == R.id.navigation_shop_favorites) {
-                Toast.makeText(this, "Favorites", Toast.LENGTH_SHORT).show();
-                return true;
-            } else if (itemId == R.id.navigation_shop_cart) {
+            } else if (itemId == R.id.navigation_market) {
                 return true;
             }
             return false;
         });
     }
 
-    private void updateCartBadge() {
-        BottomNavigationItemView itemView = (BottomNavigationItemView) bottomNavigation.findViewById(R.id.navigation_shop_cart);
-        View badge = LayoutInflater.from(this).inflate(R.layout.cart_badge, itemView, false);
-        cartBadge = badge.findViewById(R.id.cart_badge_text);
-        cartBadge.setText(String.valueOf(cartItemCount));
-        itemView.addView(badge);
-    }
-
-    public void addToCart() {
-        cartItemCount++;
-        if (cartBadge != null) {
-            cartBadge.setText(String.valueOf(cartItemCount));
-        }
-    }
 }
