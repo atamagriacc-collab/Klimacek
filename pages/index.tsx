@@ -1,12 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Footer from '../components/Footer';
 import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Youtube,
   Download,
   Leaf
 } from 'lucide-react';
@@ -24,12 +20,12 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-transparent"></div>
 
         {/* Navigation */}
-        <nav className="relative z-20 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        <nav className="sticky top-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6 transition-all duration-300">
           <div className="flex items-center space-x-4 sm:space-x-8">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 text-white">
-              <Leaf className="h-6 w-6 sm:h-8 sm:w-8" />
-              <span className="text-xl sm:text-2xl font-bold">Klimacek</span>
+            <Link href="/" className="flex items-center space-x-2">
+              <img src="/logo klimacek trans fix.png" alt="Klimacek Logo" className="h-10 w-10 sm:h-12 sm:w-12 rounded-full" />
+              <span className="text-xl sm:text-2xl font-bold text-white">Klimacek</span>
             </Link>
 
             {/* Nav Links - Hidden on mobile */}
@@ -38,7 +34,7 @@ export default function Home() {
                 Stasiun Cuaca
               </Link>
               <Link href="/products" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
-                Produk Kami
+                Produk & Layanan
               </Link>
               <Link href="/about" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
                 Tentang Kami
@@ -93,59 +89,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Social Icons */}
-          <div className="flex justify-center space-x-4 sm:space-x-6 mb-6 sm:mb-8">
-            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-          </div>
-
-          {/* Footer Links */}
-          <div className="flex flex-wrap justify-center space-x-4 sm:space-x-8 mb-6 sm:mb-8">
-            <Link href="/about" className="text-white/70 hover:text-white transition-colors text-sm">
-              About
-            </Link>
-            <Link href="/features" className="text-white/70 hover:text-white transition-colors text-sm">
-              Features
-            </Link>
-            <Link href="/pricing" className="text-white/70 hover:text-white transition-colors text-sm">
-              Pricing
-            </Link>
-            <Link href="/gallery" className="text-white/70 hover:text-white transition-colors text-sm">
-              Gallery
-            </Link>
-            <Link href="/team" className="text-white/70 hover:text-white transition-colors text-sm">
-              Team
-            </Link>
-          </div>
-
-          {/* Contact Button */}
-          <div className="flex justify-center mb-6 sm:mb-8">
-            <Link href="/contact" className="px-6 sm:px-8 py-2 sm:py-3 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors text-sm sm:text-base">
-              Contact Us
-            </Link>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center text-white/50 text-sm">
-            © 2025 All Rights Reserved
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

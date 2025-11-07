@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Footer from '../components/Footer';
 import { db } from '../lib/firebase';
 import { ref, onValue, query, orderByChild, limitToLast } from 'firebase/database';
 import dynamic from 'next/dynamic';
@@ -17,11 +18,6 @@ import {
   CloudRain,
   Sun,
   Leaf,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Youtube,
   ChevronDown,
   Thermometer,
   Droplets,
@@ -716,55 +712,7 @@ export default function WeatherStations() {
         )}
 
         {/* Footer */}
-        <footer className="bg-black py-6 sm:py-8 border-t border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-center space-x-4 sm:space-x-6 mb-4 sm:mb-6">
-              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </a>
-              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Twitter className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </a>
-              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </a>
-              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </a>
-              <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <Youtube className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </a>
-            </div>
-
-            <div className="flex flex-wrap justify-center space-x-4 sm:space-x-8 mb-4 sm:mb-6">
-              <Link href="/about" className="text-gray-400 hover:text-white transition text-sm">
-                About
-              </Link>
-              <Link href="/features" className="text-gray-400 hover:text-white transition text-sm">
-                Features
-              </Link>
-              <Link href="/pricing" className="text-gray-400 hover:text-white transition text-sm">
-                Pricing
-              </Link>
-              <Link href="/gallery" className="text-gray-400 hover:text-white transition text-sm">
-                Gallery
-              </Link>
-              <Link href="/team" className="text-gray-400 hover:text-white transition text-sm">
-                Team
-              </Link>
-            </div>
-
-            <div className="flex justify-center mb-4 sm:mb-6">
-              <Link href="/contact" className="px-4 sm:px-6 py-2 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition text-sm sm:text-base">
-                Contact Us
-              </Link>
-            </div>
-
-            <div className="text-center text-gray-500 text-sm">
-              © 2025 All Rights Reserved
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

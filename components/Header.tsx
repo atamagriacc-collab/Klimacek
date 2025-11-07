@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
-  { name: 'Products', href: '/products' },
+  { name: 'Products & Services', href: '/products' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -16,7 +16,7 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto flex items-center px-4 py-3 md:py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
-          <img src="/images/logo.png" alt="Atama Agri Logo" className="h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20 rounded-full transition-transform hover:scale-105" />
+          <img src="/logo klimacek trans fix.png" alt="Klimacek Logo" className="h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20 rounded-full transition-transform hover:scale-105" />
         </Link>
         {/* Desktop Nav */}
         <ul className="hidden md:flex flex-1 justify-center gap-7 items-center mx-auto" aria-label="Main navigation">

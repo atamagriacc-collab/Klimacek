@@ -2,16 +2,23 @@ plugins {
     id 'com.android.application'
 }
 
+// Load keystore properties
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace 'com.klimacek.app'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.klimacek.app"
         minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0.0"
+        targetSdk 35
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -21,16 +28,14 @@ android {
     }
 
     signingConfigs {
-        // TODO: Create release keystore and configure signing
-        // Uncomment and configure after creating keystore
-        /*
         release {
-            storeFile file("path/to/your/release-keystore.jks")
-            storePassword System.getenv("KEYSTORE_PASSWORD") ?: project.findProperty("keystorePassword")
-            keyAlias System.getenv("KEY_ALIAS") ?: project.findProperty("keyAlias")
-            keyPassword System.getenv("KEY_PASSWORD") ?: project.findProperty("keyPassword")
+            if (keystorePropertiesFile.exists()) {
+                storeFile file("../" + keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
         }
-        */
     }
 
     buildTypes {
@@ -47,8 +52,8 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            // TODO: Uncomment after configuring signingConfigs
-            // signingConfig signingConfigs.release
+            // Signing configuration enabled
+            signingConfig signingConfigs.release
 
             // Production API URL
             buildConfigField "String", "API_BASE_URL", "\"https://api.klimacek.com\""

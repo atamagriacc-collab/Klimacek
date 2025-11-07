@@ -1,0 +1,227 @@
+===============================================
+KLIMACEK - GOOGLE PLAY STORE LISTING
+Quick Copy-Paste Values
+===============================================
+
+📱 APP NAME (Already Set)
+===============================================
+Klimacek
+
+
+📝 SHORT DESCRIPTION (79/80 characters)
+===============================================
+Monitor real-time weather & climate data for smarter farming and agriculture
+
+
+📄 FULL DESCRIPTION (2,850/4,000 characters)
+===============================================
+🌤️ Klimacek - Your Smart Climate Monitoring Companion
+
+Transform the way you monitor weather and environmental conditions with Klimacek, the comprehensive climate monitoring app designed for farmers, agricultural professionals, and weather enthusiasts.
+
+📊 REAL-TIME ENVIRONMENTAL MONITORING
+
+Stay informed with live data from IoT weather stations:
+• Temperature & Humidity - Track current and historical climate patterns
+• Light Intensity - Monitor sunlight levels for optimal crop growth
+• Rainfall Measurements - Accurate precipitation data for irrigation planning
+• Wind Speed - Real-time wind monitoring for weather forecasting
+• Solar Panel Metrics - Track voltage, current, and power generation
+• Comprehensive Charts - Visualize data trends over time
+
+🌾 DESIGNED FOR AGRICULTURE
+
+Make data-driven farming decisions with:
+• Location-based weather data for your specific area
+• Historical climate trends and analytics
+• Environmental insights for crop planning
+• Precision agriculture support
+• Real-time alerts and monitoring
+
+📱 SMART DASHBOARD
+
+Experience intuitive data visualization:
+• Interactive charts with multiple sensor readings
+• Customizable time ranges (hourly, daily, weekly)
+• Detailed sensor breakdown with drill-down views
+• Clean, modern interface optimized for mobile
+• Easy-to-read metrics and indicators
+
+📚 AGRICULTURAL KNOWLEDGE BASE
+
+Access curated articles on:
+• Soil Management - Best practices for soil health
+• Crop Cultivation - Growing tips and techniques
+• Weather Patterns - Understanding climate for farming
+• Pest Management - Identify and control common pests
+• Sustainable Farming - Eco-friendly agricultural methods
+
+🛒 EQUIPMENT MARKETPLACE
+
+Discover and learn about:
+• Weather station hardware
+• IoT sensors and monitoring devices
+• Solar-powered equipment
+• Agricultural technology products
+
+✨ KEY FEATURES
+
+• Live IoT Sensor Integration - Connect to real climate monitoring stations
+• Beautiful Data Visualization - Charts and graphs for easy analysis
+• Multi-Sensor Support - Temperature, humidity, rain, wind, light, and more
+• Location Services - Get data relevant to your geographic area
+• Offline Article Access - Read agricultural guides anytime
+• Regular Updates - New features and content added frequently
+
+🎯 WHO IS THIS FOR?
+
+• Farmers & Agricultural Professionals
+• Agronomists & Agricultural Researchers
+• Garden Enthusiasts & Hobbyists
+• Climate & Weather Enthusiasts
+• IoT & Smart Farming Advocates
+• Students of Agricultural Science
+
+🔒 PRIVACY & SECURITY
+
+Your privacy matters to us:
+• Secure HTTPS data transmission
+• Transparent data collection (see our privacy policy)
+• No selling of personal information
+• Control over location permissions
+
+📈 PRECISION AGRICULTURE MADE EASY
+
+Klimacek bridges the gap between advanced IoT technology and practical farming needs. Whether you're managing a large agricultural operation or a backyard garden, our app provides the environmental insights you need for success.
+
+🌍 SUPPORT SUSTAINABLE FARMING
+
+Monitor your environment, optimize resource usage, and make informed decisions that benefit both your yields and the planet.
+
+Download Klimacek today and take control of your climate monitoring!
+
+---
+
+For support, visit: www.klimacek.com
+Email: support@klimacek.com
+Privacy Policy: www.klimacek.com/privacy-policy.html
+
+Join thousands of users making smarter agricultural decisions with real-time climate data.
+
+
+🔗 PRIVACY POLICY URL
+===============================================
+https://www.klimacek.com/privacy-policy.html
+
+
+📧 CONTACT EMAIL
+===============================================
+support@klimacek.com
+
+
+🌐 WEBSITE
+===============================================
+https://www.klimacek.com
+
+
+🏷️ CATEGORY SUGGESTIONS
+===============================================
+Primary Category: Weather
+Secondary Category: Education
+
+
+===============================================
+GRAPHICS REQUIREMENTS CHECKLIST
+===============================================
+
+✅ App Icon (REQUIRED)
+   - Size: 512 x 512 px
+   - Format: PNG or JPEG
+   - Max Size: 1 MB
+   - Status: NEED TO EXPORT
+
+✅ Feature Graphic (REQUIRED)
+   - Size: 1024 x 500 px
+   - Format: PNG or JPEG
+   - Max Size: 15 MB
+   - Status: NEED TO CREATE
+
+✅ Phone Screenshots (REQUIRED - Minimum 2, Recommended 4-8)
+   - Size: 1080 x 2340 px (recommended)
+   - Format: PNG or JPEG
+   - Max Size: 8 MB each
+   - Aspect Ratio: 9:16 (portrait)
+   - Status: NEED TO CAPTURE
+
+   Suggested Screenshots:
+   1. Login/Main Screen
+   2. Dashboard with Multiple Sensors
+   3. Detailed Sensor Chart View
+   4. Articles List (Education)
+   5. Sensor Detail with Data
+   6. Shop/Products Page
+
+❌ Tablet Screenshots (OPTIONAL)
+   - Can skip for initial launch
+
+❌ Video (OPTIONAL)
+   - YouTube URL if available
+
+
+===============================================
+NEXT STEPS TO COMPLETE STORE LISTING
+===============================================
+
+1. ✅ Copy Short Description above to Play Console
+2. ✅ Copy Full Description above to Play Console
+3. ⚠️  Create/Export App Icon (512x512 PNG)
+4. ⚠️  Create Feature Graphic (1024x500 PNG)
+5. ⚠️  Take Screenshots from app (4-8 images)
+6. ✅ Add Privacy Policy URL (already done)
+7. ✅ Save all changes in Play Console
+
+
+===============================================
+TIPS FOR BETTER VISIBILITY
+===============================================
+
+Keywords included in description:
+- Weather monitoring
+- Climate data
+- Agriculture
+- Farming
+- IoT sensors
+- Temperature
+- Humidity
+- Rainfall
+- Precision agriculture
+- Smart farming
+
+Target Audience:
+- Farmers
+- Agronomists
+- Agricultural professionals
+- Garden enthusiasts
+- Weather enthusiasts
+
+
+===============================================
+SUPPORT INFORMATION
+===============================================
+
+Developer Name: (Your company/developer name)
+Email: support@klimacek.com
+Website: https://www.klimacek.com
+Privacy Policy: https://www.klimacek.com/privacy-policy.html
+
+Address:
+Daratan, RT.02/RW.06, Senden, Tohudan,
+Kec. Colomadu, Kabupaten Karanganyar,
+Jawa Tengah 57173
+
+Phone: +62 819-1199-8210
+
+
+===============================================
+END OF COPY-PASTE CONTENT
+===============================================
