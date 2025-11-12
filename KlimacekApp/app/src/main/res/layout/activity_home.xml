@@ -108,7 +108,7 @@
                         android:id="@+id/cardIntensitasCahaya"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginEnd="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -120,42 +120,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Intensitas Cahaya"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_light"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_light_sensor"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvIntensitasCahayaValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" Lux"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Intensitas Cahaya"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvIntensitasCahayaValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniIntensitasCahaya"
@@ -172,7 +178,7 @@
                         android:id="@+id/cardKelembapan"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginStart="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -184,42 +190,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kelembapan"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_humidity"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_humidity"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvKelembapanValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" %"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Kelembapan"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvKelembapanValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniKelembapan"
@@ -245,7 +257,7 @@
                         android:id="@+id/cardKecepatanAngin"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginEnd="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -257,42 +269,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kecepatan Angin"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_wind"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_wind"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvKecepatanAnginValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" km/h"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Kecepatan Angin"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvKecepatanAnginValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniKecepatanAngin"
@@ -309,7 +327,7 @@
                         android:id="@+id/cardCurahHujan"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginStart="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -321,42 +339,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Curah Hujan"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_rain"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_rain"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvCurahHujanValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" mm/h"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Curah Hujan"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvCurahHujanValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniCurahHujan"
@@ -382,7 +406,7 @@
                         android:id="@+id/cardTemperatur"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginEnd="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -394,42 +418,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Temperatur Suhu"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_temp"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_temp"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvTemperaturValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" °C"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Temperatur Suhu"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvTemperaturValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniTemperatur"
@@ -446,7 +476,7 @@
                         android:id="@+id/cardTegangan"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginStart="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -458,42 +488,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tegangan Panel Surya"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_voltage"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_voltage"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvTeganganValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" V"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Tegangan Panel Surya"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvTeganganValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniTegangan"
@@ -519,7 +555,7 @@
                         android:id="@+id/cardArus"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginEnd="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -531,42 +567,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Arus Panel Surya"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_current"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_current"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvArusValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" mA"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Arus Panel Surya"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvArusValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniArus"
@@ -583,7 +625,7 @@
                         android:id="@+id/cardWatt"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="180dp"
+                        android:layout_height="140dp"
                         android:layout_marginStart="6dp"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="2dp"
@@ -595,42 +637,48 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Watt Panel Surya"
-                                android:textColor="#757575"
-                                android:textSize="13sp"
-                                android:textStyle="normal" />
-
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:baselineAligned="false">
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/gradient_power"
+                                    android:gravity="center"
+                                    android:layout_marginEnd="12dp">
+
+                                    <ImageView
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:src="@drawable/ic_power"
+                                        app:tint="#FFFFFF" />
+
+                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/tvWattValue"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#212121"
-                                    android:textSize="32sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" W"
-                                    android:textColor="#9E9E9E"
-                                    android:textSize="16sp"
-                                    android:layout_gravity="bottom"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginStart="4dp" />
+                                    android:text="Watt Panel Surya"
+                                    android:textColor="#424242"
+                                    android:textSize="12sp"
+                                    android:textStyle="normal" />
 
                             </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvWattValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="#212121"
+                                android:textSize="28sp"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="4dp" />
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/chartMiniWatt"

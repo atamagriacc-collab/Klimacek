@@ -53,7 +53,7 @@ public class SensorDetailActivity extends AppCompatActivity {
     private int dataIndex = 0;
     private boolean isRunning = true;
 
-    private ApiClient apiClient;
+    private FirebaseClient firebaseClient;
     private ArrayList<Long> timestamps = new ArrayList<>();
     private ArrayList<Float> values = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class SensorDetailActivity extends AppCompatActivity {
             if (sensorUnit == null) sensorUnit = "Cd";
         }
 
-        apiClient = new ApiClient();
+        firebaseClient = new FirebaseClient();
         initializeViews();
         setupChart();
         setupTimeRangeSpinner();
@@ -135,9 +135,14 @@ public class SensorDetailActivity extends AppCompatActivity {
         sensorChart.setScaleXEnabled(true);
         sensorChart.setScaleYEnabled(true);
         sensorChart.setDoubleTapToZoomEnabled(true);
-        sensorChart.setHighlightPerDragEnabled(false);
+        sensorChart.setHighlightPerDragEnabled(true);
         sensorChart.setBackgroundColor(Color.WHITE);
         sensorChart.setNoDataText("Loading...");
+
+        // Set custom marker view for interactive tooltips
+        CustomMarkerView markerView = new CustomMarkerView(this, R.layout.custom_marker_view, sensorUnit);
+        markerView.setChartView(sensorChart);
+        sensorChart.setMarker(markerView);
 
         // Set zoom limits
         sensorChart.setMaxVisibleValueCount(100);
@@ -180,12 +185,21 @@ public class SensorDetailActivity extends AppCompatActivity {
         dataSet.setColor(Color.parseColor("#7C4DFF"));
         dataSet.setLineWidth(2.5f);
         dataSet.setCircleColor(Color.parseColor("#7C4DFF"));
-        dataSet.setCircleRadius(4f);
+        dataSet.setCircleRadius(3f);
         dataSet.setDrawCircleHole(true);
         dataSet.setCircleHoleColor(Color.WHITE);
+        dataSet.setCircleHoleRadius(1.5f);
+        dataSet.setDrawCircles(entries.size() <= 50); // Only show circles if data points are not too many
         dataSet.setDrawValues(false);
         dataSet.setMode(LineDataSet.Mode.LINEAR);
         dataSet.setDrawFilled(false);
+
+        // Enable highlighting
+        dataSet.setHighLightColor(Color.parseColor("#FF6E40"));
+        dataSet.setHighlightLineWidth(2f);
+        dataSet.setDrawHighlightIndicators(true);
+        dataSet.setDrawHorizontalHighlightIndicator(true);
+        dataSet.setDrawVerticalHighlightIndicator(true);
 
         LineData lineData = new LineData(dataSet);
         sensorChart.setData(lineData);
@@ -255,13 +269,13 @@ public class SensorDetailActivity extends AppCompatActivity {
 
     private void fetchSensorData() {
         // Fetch 100 records to have enough data for filtering
-        apiClient.getSensorData(null, 100, new ApiClient.ApiCallback() {
+        firebaseClient.getSensorData(null, 100, new FirebaseClient.FirebaseCallback() {
             @Override
-            public void onSuccess(ApiResponse response) {
-                if (response.getData() != null && !response.getData().isEmpty()) {
-                    android.util.Log.d("SensorDetailActivity", "Fetched " + response.getData().size() + " records");
+            public void onSuccess(List<SensorData> dataList) {
+                if (dataList != null && !dataList.isEmpty()) {
+                    android.util.Log.d("SensorDetailActivity", "Fetched " + dataList.size() + " records");
                     allData.clear();
-                    allData.addAll(response.getData());
+                    allData.addAll(dataList);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -269,7 +283,7 @@ public class SensorDetailActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    android.util.Log.w("SensorDetailActivity", "No data received from API");
+                    android.util.Log.w("SensorDetailActivity", "No data received from Firebase");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

@@ -41,7 +41,7 @@ public class DashboardActivity extends AppCompatActivity {
     private int dataIndex = 0;
     private boolean isRunning = true;
 
-    private ApiClient apiClient;
+    private FirebaseClient firebaseClient;
     private ArrayList<Long> timestamps = new ArrayList<>();
 
     @Override
@@ -54,7 +54,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_dashboard);
 
-        apiClient = new ApiClient();
+        firebaseClient = new FirebaseClient();
         initializeViews();
         setupCharts();
         setupClickListeners();
@@ -96,6 +96,15 @@ public class DashboardActivity extends AppCompatActivity {
         chart.setPinchZoom(false);
         chart.setBackgroundColor(Color.WHITE);
         chart.setNoDataText("");
+        chart.setHighlightPerDragEnabled(true);
+
+        // Determine unit based on label
+        String unit = getUnitForSensor(label);
+
+        // Set custom marker view for interactive tooltips
+        CustomMarkerView markerView = new CustomMarkerView(this, R.layout.custom_marker_view, unit);
+        markerView.setChartView(chart);
+        chart.setMarker(markerView);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -121,6 +130,20 @@ public class DashboardActivity extends AppCompatActivity {
         chart.animateX(500);
     }
 
+    private String getUnitForSensor(String sensorLabel) {
+        switch (sensorLabel) {
+            case "Intensitas Cahaya": return "Lux";
+            case "Kelembapan": return "%";
+            case "Temperatur": return "°C";
+            case "Curah Hujan": return "mm/h";
+            case "Tegangan": return "V";
+            case "Arus": return "mA";
+            case "Watt": return "W";
+            case "Kecepatan Angin": return "km/h";
+            default: return "";
+        }
+    }
+
     private void updateChart(LineChart chart, ArrayList<Entry> entries) {
         LineDataSet dataSet = new LineDataSet(entries, "");
         dataSet.setColor(Color.parseColor("#2196F3"));
@@ -129,6 +152,13 @@ public class DashboardActivity extends AppCompatActivity {
         dataSet.setDrawValues(false);
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         dataSet.setDrawFilled(false);
+
+        // Enable highlighting
+        dataSet.setHighLightColor(Color.parseColor("#FF6E40"));
+        dataSet.setHighlightLineWidth(1.5f);
+        dataSet.setDrawHighlightIndicators(true);
+        dataSet.setDrawHorizontalHighlightIndicator(false);
+        dataSet.setDrawVerticalHighlightIndicator(true);
 
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
@@ -230,12 +260,10 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void fetchSensorData() {
-        apiClient.getSensorData(null, 7, new ApiClient.ApiCallback() {
+        firebaseClient.getSensorData(null, 7, new FirebaseClient.FirebaseCallback() {
             @Override
-            public void onSuccess(ApiResponse response) {
-                if (response.getData() != null && !response.getData().isEmpty()) {
-                    List<SensorData> dataList = response.getData();
-
+            public void onSuccess(List<SensorData> dataList) {
+                if (dataList != null && !dataList.isEmpty()) {
                     // Clear existing data
                     timestamps.clear();
 

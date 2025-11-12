@@ -67,29 +67,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginEnd="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_light"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Intensitas Cahaya"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_light_sensor"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Intensitas Cahaya"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartIntensitasCahaya"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -101,29 +118,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginStart="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_humidity"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Kelembapan"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_humidity"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Kelembapan"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartKelembapan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -144,29 +178,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginEnd="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_temp"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Temperatur Suhu"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_temp"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Temperatur Suhu"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartTemperatur"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -178,29 +229,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginStart="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_rain"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Curah Hujan"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_rain"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Curah Hujan"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartCurahHujan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -221,29 +289,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginEnd="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_voltage"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tegangan Panel Surya"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_voltage"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Tegangan Panel Surya"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartTegangan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -255,29 +340,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginStart="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_current"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Arus Panel Surya"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_current"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Arus Panel Surya"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartArus"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -298,29 +400,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginEnd="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_power"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Watt Panel Surya"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_power"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Watt Panel Surya"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartWatt"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -332,29 +451,46 @@
                     android:layout_weight="1"
                     android:layout_height="200dp"
                     android:layout_marginStart="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@drawable/gradient_wind"
                         android:padding="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Kecepatan Angin"
-                            android:textColor="#333333"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_wind"
+                                android:layout_marginEnd="8dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Kecepatan Angin"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chartKecepatanAngin"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 

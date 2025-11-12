@@ -87,4 +87,53 @@ public class SensorData {
     public String getReceivedAt() {
         return receivedAt;
     }
+
+    // Setters
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setWindKmh(Float windKmh) {
+        this.windKmh = windKmh;
+    }
+
+    public void setRainrateMmh(Float rainrateMmh) {
+        this.rainrateMmh = rainrateMmh;
+    }
+
+    public void setTemperatureC(Float temperatureC) {
+        this.temperatureC = temperatureC;
+    }
+
+    public void setHumidity(Float humidity) {
+        this.humidity = humidity;
+    }
+
+    public void setLightLux(Float lightLux) {
+        this.lightLux = lightLux;
+    }
+
+    public void setSolVoltageV(Float solVoltageV) {
+        this.solVoltageV = solVoltageV;
+    }
+
+    public void setSolCurrentMa(Float solCurrentMa) {
+        this.solCurrentMa = solCurrentMa;
+    }
+
+    public void setSolPowerW(Float solPowerW) {
+        this.solPowerW = solPowerW;
+    }
+
+    public void setReceivedAt(String receivedAt) {
+        this.receivedAt = receivedAt;
+    }
 }

@@ -7,4 +7,5 @@
     <color name="primary_green">#5C7A00</color>
     <color name="primary_dark_green">#3E5F00</color>
     <color name="primary_light_green">#7A9500</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>
