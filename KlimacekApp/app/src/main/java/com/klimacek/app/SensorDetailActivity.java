@@ -1,11 +1,19 @@
 package com.klimacek.app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -36,6 +44,8 @@ import java.util.Locale;
 import java.util.Random;
 
 public class SensorDetailActivity extends AppCompatActivity {
+
+    private static final int PERMISSION_REQUEST_CODE = 100;
 
     private ImageView backButton;
     private TextView titleText;
@@ -231,7 +241,11 @@ public class SensorDetailActivity extends AppCompatActivity {
         downloadCsvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadDataAsCSV();
+                if (checkPermission()) {
+                    downloadDataAsCSV();
+                } else {
+                    requestPermission();
+                }
             }
         });
     }
@@ -413,6 +427,37 @@ public class SensorDetailActivity extends AppCompatActivity {
         }
     }
 
+    private boolean checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // Android 10+ doesn't need WRITE_EXTERNAL_STORAGE permission for MediaStore
+            return true;
+        } else {
+            // Android 9 and below need WRITE_EXTERNAL_STORAGE permission
+            int result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            return result == PackageManager.PERMISSION_GRANTED;
+        }
+    }
+
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                downloadDataAsCSV();
+            } else {
+                showToast("Izin penyimpanan diperlukan untuk mengunduh CSV");
+            }
+        }
+    }
+
     private void downloadDataAsCSV() {
         try {
             // Create CSV content
@@ -432,19 +477,49 @@ public class SensorDetailActivity extends AppCompatActivity {
                 csvContent.append(timeStr).append(",").append(String.format(Locale.US, "%.2f", entry.getY())).append("\n");
             }
 
-            // Save to Downloads folder
+            // Generate file name
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
             String fileName = sensorName.replace(" ", "_") + "_" + dateFormat.format(new Date()) + ".csv";
 
-            File path = new File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), fileName);
-            FileWriter writer = new FileWriter(path);
-            writer.write(csvContent.toString());
-            writer.close();
+            // Save file using MediaStore for Android 10+ or traditional method for older versions
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // Android 10+ - Use MediaStore API
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Downloads.DISPLAY_NAME, fileName);
+                values.put(MediaStore.Downloads.MIME_TYPE, "text/csv");
+                values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
 
-            showToast("CSV berhasil diunduh: " + fileName + " (" + chartData.size() + " records)");
-        } catch (IOException e) {
+                Uri uri = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
+                if (uri != null) {
+                    java.io.OutputStream outputStream = getContentResolver().openOutputStream(uri);
+                    if (outputStream != null) {
+                        outputStream.write(csvContent.toString().getBytes());
+                        outputStream.close();
+                        showToast("CSV berhasil diunduh ke Downloads: " + fileName + " (" + chartData.size() + " records)");
+                    }
+                }
+            } else {
+                // Android 9 and below - Use traditional method
+                File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                if (!downloadsDir.exists()) {
+                    downloadsDir.mkdirs();
+                }
+                File file = new File(downloadsDir, fileName);
+                FileWriter writer = new FileWriter(file);
+                writer.write(csvContent.toString());
+                writer.close();
+
+                // Notify media scanner to make file visible in Downloads app
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                mediaScanIntent.setData(Uri.fromFile(file));
+                sendBroadcast(mediaScanIntent);
+
+                showToast("CSV berhasil diunduh ke Downloads: " + fileName + " (" + chartData.size() + " records)");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-            showToast("Gagal mengunduh CSV");
+            android.util.Log.e("SensorDetailActivity", "Error downloading CSV: " + e.getMessage());
+            showToast("Gagal mengunduh CSV: " + e.getMessage());
         }
     }
 

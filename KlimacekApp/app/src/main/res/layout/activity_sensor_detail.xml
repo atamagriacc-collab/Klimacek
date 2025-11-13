@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5"
+    android:background="#F5F7FA"
     tools:context=".SensorDetailActivity">
 
     <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#FFFFFF"
-        android:elevation="2dp"
+        android:layout_height="64dp"
+        android:background="@color/primary_green"
+        android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="16dp"
@@ -21,13 +21,13 @@
 
         <ImageView
             android:id="@+id/backButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/ic_arrow_back"
             android:clickable="true"
             android:focusable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="#333333" />
+            app:tint="#FFFFFF" />
 
         <TextView
             android:id="@+id/titleText"
@@ -36,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Dashboard"
-            android:textColor="#333333"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center" />
 
@@ -62,12 +62,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="20dp">
 
-                <View
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/circle_yellow" />
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_icon_primary"
+                    android:gravity="center">
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/sensorNameText"
@@ -75,56 +77,64 @@
                     android:layout_height="wrap_content"
                     android:text="Intensitas Cahaya"
                     android:textColor="#333333"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     android:layout_marginStart="12dp" />
 
             </LinearLayout>
 
             <!-- Time Range Selector -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="16dp"
-                android:background="#FFFFFF"
-                android:padding="12dp"
-                android:elevation="2dp">
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Rentang Waktu:"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="12dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
 
-                <Spinner
-                    android:id="@+id/timeRangeSpinner"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="40dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown"
-                    android:padding="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rentang Waktu:"
+                        android:textColor="#333333"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="12dp" />
 
-            </LinearLayout>
+                    <Spinner
+                        android:id="@+id/timeRangeSpinner"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:spinnerMode="dropdown"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <!-- Main Chart Card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="400dp"
                 android:layout_marginBottom="20dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
                 app:cardBackgroundColor="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/sensorChart"
@@ -139,14 +149,17 @@
             <Button
                 android:id="@+id/downloadCsvButton"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="52dp"
                 android:layout_gravity="start"
                 android:text="Unduh CSV"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 android:textAllCaps="false"
-                android:backgroundTint="#2C2C2C"
-                app:cornerRadius="24dp"
+                android:backgroundTint="@color/primary_green"
+                app:cornerRadius="26dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
                 android:layout_marginBottom="24dp" />
 
             <!-- Bottom spacing for navigation bar -->
