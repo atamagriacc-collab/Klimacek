@@ -19,8 +19,8 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
-        {/* Cloudflare Turnstile */}
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        {/* Cloudflare Turnstile - Disabled (not used in auth pages) */}
+        {/* <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> */}
       </Head>
       <body className="bg-beige">
         <Main />

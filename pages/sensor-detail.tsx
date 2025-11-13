@@ -30,6 +30,7 @@ import {
   TrendingDown,
   Activity
 } from 'lucide-react';
+import * as XLSX from 'xlsx';
 
 interface SensorDataPoint {
   time: string;
@@ -284,26 +285,63 @@ export default function SensorDetail() {
     }
   };
 
-  // Download data
+  // Download data as Excel
   const handleDownload = () => {
-    const dataToExport = {
-      sensorType: getSensorTitle(),
-      unit: getSensorUnit(sensorType as string),
-      timeInterval,
-      exportDate: new Date().toISOString(),
-      data: sensorData,
-      statistics: recommendation?.statistics || null
-    };
+    // Create worksheet data
+    const worksheetData = [];
 
-    const dataStr = JSON.stringify(dataToExport, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${sensorType}-data-${new Date().toISOString()}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Add header info
+    worksheetData.push(['Klimacek - Data Sensor']);
+    worksheetData.push([]);
+    worksheetData.push(['Jenis Sensor:', getSensorTitle()]);
+    worksheetData.push(['Satuan:', getSensorUnit(sensorType as string)]);
+    worksheetData.push(['Periode:', timeInterval === '24h' ? '24 Jam Terakhir' : '7 Hari Terakhir']);
+    worksheetData.push(['Tanggal Export:', new Date().toLocaleString('id-ID')]);
+    worksheetData.push([]);
+
+    // Add statistics if available
+    if (recommendation?.statistics) {
+      worksheetData.push(['Statistik Data']);
+      worksheetData.push(['Nilai Minimum:', recommendation.statistics.min.toFixed(2), getSensorUnit(sensorType as string)]);
+      worksheetData.push(['Nilai Maksimum:', recommendation.statistics.max.toFixed(2), getSensorUnit(sensorType as string)]);
+      worksheetData.push(['Nilai Rata-rata:', recommendation.statistics.avg.toFixed(2), getSensorUnit(sensorType as string)]);
+      worksheetData.push(['Nilai Terkini:', recommendation.statistics.latest.toFixed(2), getSensorUnit(sensorType as string)]);
+      worksheetData.push([]);
+    }
+
+    // Add data table header
+    worksheetData.push(['Waktu', 'Nilai', 'Satuan', 'Timestamp']);
+
+    // Add sensor data
+    sensorData.forEach(point => {
+      worksheetData.push([
+        point.time,
+        point.value.toFixed(2),
+        getSensorUnit(sensorType as string),
+        new Date(point.timestamp).toLocaleString('id-ID')
+      ]);
+    });
+
+    // Create worksheet
+    const ws = XLSX.utils.aoa_to_sheet(worksheetData);
+
+    // Set column widths
+    ws['!cols'] = [
+      { wch: 20 },  // Waktu
+      { wch: 15 },  // Nilai
+      { wch: 10 },  // Satuan
+      { wch: 25 }   // Timestamp
+    ];
+
+    // Create workbook
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Data Sensor');
+
+    // Generate filename
+    const filename = `Klimacek_${getSensorTitle()}_${new Date().toISOString().split('T')[0]}.xlsx`;
+
+    // Download file
+    XLSX.writeFile(wb, filename);
   };
 
   // Format time for display

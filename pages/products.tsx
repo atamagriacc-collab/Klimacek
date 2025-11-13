@@ -1,7 +1,8 @@
-  import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Footer from '../components/Footer';
+import { useAuth } from '../lib/auth-context';
 import {
   Check,
   Clock,
@@ -9,7 +10,10 @@ import {
   Activity,
   Brain,
   ArrowRight,
-  ArrowLeft
+  ArrowLeft,
+  LogIn,
+  LogOut,
+  User
 } from 'lucide-react';
 
 interface PricingPlan {
@@ -40,6 +44,7 @@ interface Product {
 }
 
 export default function Products() {
+  const { user, logout } = useAuth();
   const [showCustomTools, setShowCustomTools] = useState(false);
   const customToolsRef = useRef<HTMLDivElement>(null);
 
@@ -288,6 +293,42 @@ export default function Products() {
                 Tentang Kami
               </Link>
             </div>
+          </div>
+
+          {/* Auth Buttons */}
+          <div className="flex items-center space-x-3">
+            {user ? (
+              <>
+                <div className="hidden sm:flex items-center space-x-2 text-white/90 text-sm">
+                  <User className="w-4 h-4" />
+                  <span>{user.email}</span>
+                </div>
+                <button
+                  onClick={() => logout()}
+                  className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden sm:inline">Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span className="hidden sm:inline">Login</span>
+                </Link>
+                <Link
+                  href="/signup"
+                  className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm font-medium"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="hidden sm:inline">Daftar</span>
+                </Link>
+              </>
+            )}
           </div>
         </nav>
 

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Footer from '../components/Footer';
+import ProtectedRoute from '../components/ProtectedRoute';
 import { db } from '../lib/firebase';
 import { ref, onValue, query, orderByChild, limitToLast } from 'firebase/database';
 import dynamic from 'next/dynamic';
@@ -375,7 +376,7 @@ export default function WeatherStations() {
   };
 
   return (
-    <>
+    <ProtectedRoute>
       <Head>
         <title>Stasiun Cuaca - Klimacek</title>
         <meta name="description" content="Monitor stasiun cuaca Klimacek di seluruh Indonesia" />
@@ -714,6 +715,6 @@ export default function WeatherStations() {
         {/* Footer */}
         <Footer />
       </div>
-    </>
+    </ProtectedRoute>
   );
 }

@@ -2,8 +2,12 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Footer from '../components/Footer';
+import { useAuth } from '../lib/auth-context';
 import {
-  Leaf
+  Leaf,
+  LogIn,
+  LogOut,
+  User
 } from 'lucide-react';
 
 interface TeamMember {
@@ -23,13 +27,14 @@ interface TeamMember {
 }
 
 export default function About() {
+  const { user, logout } = useAuth();
   const teamMembers: TeamMember[] = [
     {
       id: 1,
       name: 'Aditya Wisnu Yudha Marsudi',
       role: 'Penggerak Bisnis & Pemasaran',
-      description: 'Sebagai hustler, Aditya memimpin tim dengan peran strategis dalam menggerakkan aspek bisnis dan pemasaran Klimacek. Wisnu bertanggung jawab untuk merumuskan strategi pengembangan bisnis, menjalin kemitraan strategis, melakukan riset pasar, serta merancang dan mengeksekusi kampanye pemasaran. Dengan latar belakang dan pemahaman teknis dari Fisika, ia mampu mengintegrasikan keahliannya dalam pengambilan keputusan teknis dengan kemampuan membangun jaringan. Pengalaman organisasinya di Badan Eksekutif Mahasiswa (BEM) UNS dalam berbagai peran kepemimpinan dan kepanitiaan. Pengalaman lainnya seperti dalam startup bernama Seltive.id dan prestasi lomba Business Plan PENDIKAR 2025, semakin memperkuat kepemimpinannya dalam mengkoordinasikan kegiatan tim, mendorong inovasi dari sisi pasar, dan memastikan arah bisnis yang tepat dan berkelanjutan.',
-      image: '/images/avatar-1.jpg',
+      description: 'Memimpin strategi bisnis dan pemasaran Klimacek dengan pengalaman di BEM UNS dan startup Seltive.id. Bertanggung jawab dalam pengembangan bisnis, kemitraan strategis, dan kampanye pemasaran.',
+      image: '/images/Klimacek_Aditya Wisnu Yudha Marsudi.png',
       socialLinks: {
         facebook: '#',
         twitter: '#',
@@ -43,8 +48,8 @@ export default function About() {
       id: 2,
       name: 'Mazka Buana Hidayat',
       role: 'Ahli Teknologi & Pengembang Produk',
-      description: 'Mazka memegang peran kunci sebagai hacker yang bertanggung jawab atas seluruh aspek teknis pengembangan produk Klimacek, termasuk arsitektur sistem, pengembangan aplikasi mobile dan website, serta implementasi algoritma Artificial Intelligence (AI). Dengan keahlian mendalam dalam pemrograman (Python, Java, JavaScript, dll.) dan basis data, serta pemahaman kuat tentang machine learning dan deep learning, Mazka memastikan solusi digital yang dihasilkan inovatif, fungsional, dan scalable. Pengalamannya dalam berbagai kompetisi analisis data, hackathon di elevAIte Indonesia, dan proyek-proyek terkait statistika dan AI, salah satunya prestasi dalam Statistical Project for Smart Student membuktikan kapabilitasnya dalam menciptakan solusi praktis dari data kompleks, keterampilan yang sangat relevan dan krusial dalam pengembangan platform Klimacek.',
-      image: '/images/avatar-2.jpg',
+      description: 'Mengembangkan arsitektur sistem, aplikasi mobile, website, dan implementasi AI untuk Klimacek. Ahli dalam Python, JavaScript, machine learning, dan deep learning dengan pengalaman kompetisi data science.',
+      image: '/images/Klimacek_Mazka Buana Hidayat.png',
       socialLinks: {
         facebook: '#',
         twitter: '#',
@@ -58,8 +63,8 @@ export default function About() {
       id: 3,
       name: 'Desnia Anindy Irni Hareva',
       role: 'Desainer & Branding',
-      description: 'Sebagai hipster dalam tim, Desnia berfokus pada aspek kreatif, estetika, dan pengalaman pengguna (UI/UX) produk Klimacek. Desnia bertanggung jawab merancang tampilan antarmuka (UI/UX) aplikasi mobile dan website agar intuitif, menarik, dan mudah digunakan oleh target pengguna. Selain itu, ia juga mengelola identitas visual merek (branding), membuat materi publikasi dan promosi, serta menyusun strategi pemasaran digital yang menarik dan efektif. Dengan pengalamannya sebagai Content Manager di LinkToWork dan prestasi lomba desain poster infografis di Enthusiastic Competition UII dan Festival Ilmiah Mahasiswa UNS, Desnia menunjukkan kemampuannya dalam mengkomunikasikan informasi kompleks melalui desain visual yang menarik dan pesan yang persuasif, keterampilan kunci dalam strategi branding dan pemasaran Klimacek agar mudah diterima pasar.',
-      image: '/images/avatar-3.jpg',
+      description: 'Merancang UI/UX aplikasi dan website Klimacek yang intuitif serta mengelola identitas visual dan branding. Berpengalaman sebagai Content Manager dengan prestasi dalam lomba desain infografis.',
+      image: '/images/Klimacek_Desnia Anindy Irni Hareva.png',
       socialLinks: {
         facebook: '#',
         twitter: '#',
@@ -73,8 +78,8 @@ export default function About() {
       id: 4,
       name: 'Pramudya Jesril Pratama',
       role: 'Manajemen Operasional & Proses',
-      description: 'Dalam peran sebagai operator dan manajer operasional, Pramudya memastikan bahwa proses operasional sehari-hari dan produksi perangkat keras (KlimaStation) berjalan dengan lancar, efisien, dan sesuai standar kualitas. Berbekal keahlian dalam perancangan dan pembuatan alat serta instrumentasi sebagai mahasiswa Fisika, Jesril mengkoordinasikan kegiatan teknis terkait perakitan, pengujian, dan quality control KlimaStation. Partisipasinya dalam berbagai pelatihan instrumentasi dan proyek terkait pengembangan perangkat keras memberikan pemahaman mendalam tentang operasional perangkat untuk aplikasi di bidang pertanian dan perikanan modern, sehingga sangat kompeten dalam mengimplementasikan proses produksi Klimacek yang efisien dan menghasilkan produk berkualitas.',
-      image: '/images/avatar-1.jpg',
+      description: 'Mengelola operasional dan produksi KlimaStation dengan fokus pada perakitan, pengujian, dan quality control. Ahli dalam perancangan instrumentasi dengan pengalaman pengembangan perangkat keras.',
+      image: '/images/Klimacek_Pramudya Jesril Pratama.png',
       socialLinks: {
         facebook: '#',
         twitter: '#',
@@ -88,8 +93,8 @@ export default function About() {
       id: 5,
       name: 'Divya Zahranika',
       role: 'Pengelola Finansial & Administratif',
-      description: 'Divya bertugas mengelola seluruh aspek keuangan dan administrasi tim Klimacek. Tanggung jawabnya meliputi pembuatan Rencana Anggaran Biaya (RAB), pengelolaan arus kas, pembukuan, pelaporan keuangan, serta pengecekan kelengkapan administrasi internal dan eksternal (terkait perizinan awal dan kerjasama). Divya memastikan bahwa pengelolaan sumber daya keuangan tim berjalan secara transparan, akuntabel, dan efisien. Pengalamannya sebagai Koordinator Sekretaris dan Bendahara di event BEM UNS 2024 serta keterlibatannya sebagai Staf Sponsorship memberikan fondasi kuat dalam pengelolaan keuangan, administrasi proyek, dan pencarian sumber daya, keterampilan yang sangat relevan dalam perannya mengelola aspek finansial dan administratif Klimacek.',
-      image: '/images/avatar-2.jpg',
+      description: 'Mengelola keuangan dan administrasi Klimacek termasuk RAB, arus kas, dan pembukuan. Berpengalaman sebagai Koordinator Bendahara di BEM UNS dengan fokus pengelolaan keuangan yang transparan dan akuntabel.',
+      image: '/images/Klimacek_Divya Zahranika.png',
       socialLinks: {
         facebook: '#',
         twitter: '#',
@@ -132,6 +137,41 @@ export default function About() {
             </div>
           </div>
 
+          {/* Auth Buttons */}
+          <div className="flex items-center space-x-3">
+            {user ? (
+              <>
+                <div className="hidden sm:flex items-center space-x-2 text-white/90 text-sm">
+                  <User className="w-4 h-4" />
+                  <span>{user.email}</span>
+                </div>
+                <button
+                  onClick={() => logout()}
+                  className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden sm:inline">Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span className="hidden sm:inline">Login</span>
+                </Link>
+                <Link
+                  href="/signup"
+                  className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm font-medium"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="hidden sm:inline">Daftar</span>
+                </Link>
+              </>
+            )}
+          </div>
         </nav>
 
         {/* Header Section */}
@@ -174,36 +214,114 @@ export default function About() {
         </div>
 
         {/* Team Members Section */}
-        <div className="relative z-10 pb-8 sm:pb-12 lg:pb-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Staggered Cards Layout */}
-            <div className="space-y-8 sm:space-y-12">
-              {teamMembers.map((member, index) => (
-                <div
-                  key={member.id}
-                  className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}
-                  style={{
-                    marginTop: index === 0 ? '0' : '3rem'
-                  }}
-                >
-                  <div className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 max-w-4xl w-full">
-                    {/* Content Only Layout */}
-                    <div className="text-center">
-                      {/* Content */}
-                      <div className="w-full">
-                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">{member.name}</h2>
-                        <p className="text-blue-600 font-semibold mb-3 sm:mb-4 text-sm sm:text-base md:text-lg">{member.role}</p>
-                        <p className="text-gray-700 text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6">
-                          {member.description}
-                        </p>
+        <div className="relative z-10 py-20 sm:py-24 lg:py-32 overflow-hidden">
+          {/* Decorative Background Elements */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/5 to-transparent"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            {/* Section Header - Enhanced */}
+            <div className="text-center mb-16 sm:mb-20">
+              {/* Main Title */}
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+                Tim <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">Klimacek</span>
+              </h2>
+
+              {/* Decorative Line */}
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="h-px w-16 bg-gradient-to-r from-transparent to-blue-400"></div>
+                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                <div className="h-px w-32 bg-gradient-to-r from-blue-400 via-green-400 to-blue-400"></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <div className="h-px w-16 bg-gradient-to-l from-transparent to-green-400"></div>
+              </div>
+
+              {/* Subtitle */}
+              <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Profesional berpengalaman yang berdedikasi untuk kesuksesan Klimacek
+              </p>
+            </div>
+
+            {/* Team Grid with Decorative Elements */}
+            <div className="relative">
+              {/* Grid Background Pattern */}
+              <div className="absolute inset-0 opacity-5" style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, rgb(59, 130, 246) 1px, transparent 0)`,
+                backgroundSize: '40px 40px'
+              }}></div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 relative">
+                {teamMembers.map((member, index) => (
+                  <div
+                    key={member.id}
+                    className="relative group"
+                    style={{
+                      animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+                    }}
+                  >
+                    {/* Decorative Corner Accent */}
+                    <div className="absolute -top-4 -left-4 w-20 h-20 border-t-4 border-l-4 border-blue-400/30 rounded-tl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-4 border-r-4 border-green-400/30 rounded-br-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                    {/* Card */}
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-1">
+                      {/* Card Content */}
+                      <div className="flex flex-col sm:flex-row sm:h-[500px]">
+                        {/* Image Section */}
+                        <div className="sm:w-2/5 relative h-80 sm:h-full">
+                          <div className="absolute inset-0 overflow-hidden bg-gray-100">
+                            <img
+                              src={member.image}
+                              alt={member.name}
+                              className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+                            />
+                            {/* Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent"></div>
+                          </div>
+                        </div>
+
+                        {/* Info Section */}
+                        <div className="sm:w-3/5 p-6 sm:p-8 flex flex-col">
+                          {/* Name & Role */}
+                          <div className="mb-4">
+                            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                              {member.name}
+                            </h3>
+                            <p className="text-blue-600 font-semibold text-sm sm:text-base">
+                              {member.role}
+                            </p>
+                          </div>
+
+                          {/* Divider */}
+                          <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-green-500 mb-4"></div>
+
+                          {/* Description */}
+                          <p className="text-gray-600 text-lg sm:text-xl leading-relaxed flex-grow">
+                            {member.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
+
+        <style jsx>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}</style>
       </div>
 
       {/* Footer */}
