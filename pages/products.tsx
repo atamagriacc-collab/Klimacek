@@ -397,12 +397,25 @@ export default function Products() {
                           ))}
                         </div>
 
-                        <button
-                          onClick={plan.buttonText === 'Show All Packages' ? scrollToCustomTools : undefined}
-                          className={`w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-full font-medium transition-all hover:scale-105 text-sm sm:text-base ${plan.buttonStyle}`}
-                        >
-                          {plan.buttonText}
-                        </button>
+                        {plan.buttonText === 'Show All Packages' ? (
+                          <button
+                            onClick={scrollToCustomTools}
+                            className={`w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-full font-medium transition-all hover:scale-105 text-sm sm:text-base ${plan.buttonStyle}`}
+                          >
+                            {plan.buttonText}
+                          </button>
+                        ) : (
+                          <a
+                            href={`https://wa.me/6281911998210?text=${encodeURIComponent(
+                              `Halo kak, saya mau tanya tanya terkait paket ${plan.name} Klimacek`
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-full font-medium transition-all hover:scale-105 text-sm sm:text-base ${plan.buttonStyle} inline-block text-center`}
+                          >
+                            {plan.buttonText}
+                          </a>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -444,11 +457,16 @@ export default function Products() {
                   </div>
 
                   <div className="text-center">
-                    <Link href="/contact">
-                      <button className="bg-klimacek-brown-700 hover:bg-klimacek-brown-800 text-white px-8 sm:px-12 py-4 rounded-full font-bold text-base sm:text-lg transition-all transform hover:scale-105 shadow-2xl border-2 border-klimacek-brown-900">
-                        Daftar Sekarang
-                      </button>
-                    </Link>
+                    <a
+                      href={`https://wa.me/6281911998210?text=${encodeURIComponent(
+                        'Halo kak, saya mau tanya tanya terkait layanan Edukasi Pertanian Klimacek'
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-klimacek-brown-700 hover:bg-klimacek-brown-800 text-white px-8 sm:px-12 py-4 rounded-full font-bold text-base sm:text-lg transition-all transform hover:scale-105 shadow-2xl border-2 border-klimacek-brown-900"
+                    >
+                      Daftar Sekarang
+                    </a>
                   </div>
                 </div>
               </div>
@@ -583,15 +601,20 @@ export default function Products() {
                         </div>
 
                         {/* CTA Button */}
-                        <Link href="/contact">
-                          <button className={`w-full py-3 px-6 rounded-full font-bold transition-all transform hover:scale-105 text-sm shadow-xl ${
+                        <a
+                          href={`https://wa.me/6281911998210?text=${encodeURIComponent(
+                            `Halo kak, saya mau tanya tanya terkait paket ${pkg.scale} ${pkg.name} Klimacek`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`w-full py-3 px-6 rounded-full font-bold transition-all transform hover:scale-105 text-sm shadow-xl inline-block text-center ${
                             pkg.popular
                               ? 'bg-gradient-to-r from-accent-yellow to-yellow-400 hover:from-yellow-400 hover:to-accent-yellow text-gray-900'
                               : 'bg-klimacek-brown-700 hover:bg-klimacek-brown-800 text-white'
-                          }`}>
-                            Konsultasi Gratis →
-                          </button>
-                        </Link>
+                          }`}
+                        >
+                          Konsultasi Gratis →
+                        </a>
                       </div>
                     </div>
                   ))}
@@ -602,11 +625,16 @@ export default function Products() {
                   showCustomTools ? 'animate-fade-in animation-delay-500' : 'opacity-0'
                 }`}>
                   <p className="text-white/90 text-lg mb-4">Tidak yakin paket mana yang cocok?</p>
-                  <Link href="/contact">
-                    <button className="bg-white hover:bg-gray-100 text-klimacek-brown-900 px-8 py-3 rounded-full font-bold text-base transition-all transform hover:scale-105 shadow-2xl">
-                      Hubungi Tim Kami untuk Konsultasi
-                    </button>
-                  </Link>
+                  <a
+                    href={`https://wa.me/6281911998210?text=${encodeURIComponent(
+                      'Halo kak, saya mau konsultasi terkait paket Custom Alat Pertanian yang cocok untuk kebutuhan saya'
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-white hover:bg-gray-100 text-klimacek-brown-900 px-8 py-3 rounded-full font-bold text-base transition-all transform hover:scale-105 shadow-2xl"
+                  >
+                    Hubungi Tim Kami untuk Konsultasi
+                  </a>
                 </div>
               </div>
             </div>
