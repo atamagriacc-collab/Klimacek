@@ -282,7 +282,7 @@ export default function PrivacyPolicy() {
                       Karanganyar, Jawa Tengah, Indonesia
                     </p>
                     <p className="text-gray-700 text-sm mt-2">
-                      Email: <a href="mailto:privacy@klimacek.com" className="text-accent-yellow hover:underline">privacy@klimacek.com</a><br />
+                      Email: <a href="mailto:klimacekacc@gmail.com" className="text-accent-yellow hover:underline">klimacekacc@gmail.com</a><br />
                       Phone: <a href="tel:+628123456789" className="text-accent-yellow hover:underline">+62 812-3456-789</a>
                     </p>
                   </div>
