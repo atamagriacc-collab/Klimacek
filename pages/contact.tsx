@@ -31,7 +31,7 @@ export default function Contact() {
             <img
               src="/images/team-photo.png"
               alt="ATAMAGRI Expo"
-              className="rounded-2xl shadow-lg object-cover w-full h-full max-h-[700px]"
+              className="rounded-2xl shadow-lg object-cover w-full h-full max-h-[300px] sm:max-h-[500px] md:max-h-[700px]"
             />
           </div>
           <div className="flex">
@@ -46,15 +46,15 @@ export default function Contact() {
         {/* 5. Map Location */}
         <section className="max-w-5xl mx-auto px-4 py-12">
           <h2 className="font-serif text-2xl font-bold text-primary-900 mb-6 text-center">Our Location Map</h2>
-          <iframe
-            title="ATAMAGRI Location"
-            src="https://www.google.com/maps?q=Daratan,+RT+2+RW+6,+Senden,+Tohudan,+Kecamatan+Colomadu,+Kabupaten+Karanganyar,+Jawa+Tengah&output=embed"
-            width="100%"
-            height="350"
-            className="rounded-xl border-2 border-primary-200 w-full"
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              title="ATAMAGRI Location"
+              src="https://www.google.com/maps?q=Daratan,+RT+2+RW+6,+Senden,+Tohudan,+Kecamatan+Colomadu,+Kabupaten+Karanganyar,+Jawa+Tengah&output=embed"
+              className="absolute top-0 left-0 w-full h-full rounded-xl border-2 border-primary-200"
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          </div>
         </section>
   {/* 6. Footer */}
       </main>

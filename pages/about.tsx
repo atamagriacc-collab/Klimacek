@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Footer from '../components/Footer';
@@ -7,7 +7,9 @@ import {
   Leaf,
   LogIn,
   LogOut,
-  User
+  User,
+  Menu,
+  X
 } from 'lucide-react';
 
 interface TeamMember {
@@ -28,6 +30,7 @@ interface TeamMember {
 
 export default function About() {
   const { user, logout } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const teamMembers: TeamMember[] = [
     {
       id: 1,
@@ -118,60 +121,144 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70"></div>
 
         {/* Navigation */}
-        <nav className="sticky top-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6 transition-all duration-300">
-          <div className="flex items-center space-x-4 sm:space-x-8">
-            <Link href="/" className="flex items-center space-x-2">
-              <img src="/logo klimacek trans fix.png" alt="Klimacek Logo" className="h-10 w-10 sm:h-12 sm:w-12 rounded-full" />
-              <span className="text-xl sm:text-2xl font-bold text-white">Klimacek</span>
-            </Link>
-            <div className="hidden md:flex space-x-6 lg:space-x-8">
-              <Link href="/weather-stations" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
-                Stasiun Cuaca
+        <nav className="sticky top-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
+          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <div className="flex items-center space-x-4 sm:space-x-8">
+              <Link href="/" className="flex items-center space-x-2">
+                <img src="/logo klimacek trans fix.png" alt="Klimacek Logo" className="h-10 w-10 sm:h-12 sm:w-12 rounded-full" />
+                <span className="text-xl sm:text-2xl font-bold text-white">Klimacek</span>
               </Link>
-              <Link href="/products" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
-                Produk & Layanan
-              </Link>
-              <Link href="/about" className="text-white font-medium text-sm lg:text-base">
-                Tentang Kami
-              </Link>
+              <div className="hidden md:flex space-x-6 lg:space-x-8">
+                <Link href="/weather-stations" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                  Stasiun Cuaca
+                </Link>
+                <Link href="/products" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                  Produk & Layanan
+                </Link>
+                <Link href="/about" className="text-white font-medium text-sm lg:text-base">
+                  Tentang Kami
+                </Link>
+              </div>
+            </div>
+
+            {/* Right side buttons */}
+            <div className="flex items-center space-x-3">
+              {/* Hamburger Menu Button - Mobile Only */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+
+              {/* Desktop Auth Buttons */}
+              <div className="hidden md:flex items-center space-x-3">
+                {user ? (
+                  <>
+                    <div className="hidden sm:flex items-center space-x-2 text-white/90 text-sm">
+                      <User className="w-4 h-4" />
+                      <span>{user.email}</span>
+                    </div>
+                    <button
+                      onClick={() => logout()}
+                      className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span className="hidden sm:inline">Logout</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      <span className="hidden sm:inline">Login</span>
+                    </Link>
+                    <Link
+                      href="/signup"
+                      className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm font-medium"
+                    >
+                      <User className="w-4 h-4" />
+                      <span className="hidden sm:inline">Daftar</span>
+                    </Link>
+                  </>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-3">
-            {user ? (
-              <>
-                <div className="hidden sm:flex items-center space-x-2 text-white/90 text-sm">
-                  <User className="w-4 h-4" />
-                  <span>{user.email}</span>
+          {/* Mobile Menu Dropdown */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-white/10 bg-black/40 backdrop-blur-md">
+              <div className="px-4 py-4 space-y-3">
+                <Link
+                  href="/weather-stations"
+                  className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Stasiun Cuaca
+                </Link>
+                <Link
+                  href="/products"
+                  className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Produk & Layanan
+                </Link>
+                <Link
+                  href="/about"
+                  className="block px-4 py-3 text-white font-medium bg-white/10 rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Tentang Kami
+                </Link>
+
+                {/* Mobile Auth Buttons */}
+                <div className="border-t border-white/10 pt-3 space-y-2">
+                  {user ? (
+                    <>
+                      <div className="px-4 py-2 text-white/70 text-sm">
+                        <User className="w-4 h-4 inline mr-2" />
+                        {user.email}
+                      </div>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setMobileMenuOpen(false);
+                        }}
+                        className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        <span>Logout</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/login"
+                        className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <LogIn className="w-4 h-4" />
+                        <span>Login</span>
+                      </Link>
+                      <Link
+                        href="/signup"
+                        className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm font-medium"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <User className="w-4 h-4" />
+                        <span>Daftar</span>
+                      </Link>
+                    </>
+                  )}
                 </div>
-                <button
-                  onClick={() => logout()}
-                  className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span className="hidden sm:inline">Logout</span>
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
-                >
-                  <LogIn className="w-4 h-4" />
-                  <span className="hidden sm:inline">Login</span>
-                </Link>
-                <Link
-                  href="/signup"
-                  className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm font-medium"
-                >
-                  <User className="w-4 h-4" />
-                  <span className="hidden sm:inline">Daftar</span>
-                </Link>
-              </>
-            )}
-          </div>
+              </div>
+            </div>
+          )}
         </nav>
 
         {/* Header Section */}
@@ -267,9 +354,9 @@ export default function About() {
                     {/* Card */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-1">
                       {/* Card Content */}
-                      <div className="flex flex-col sm:flex-row sm:h-[500px]">
+                      <div className="flex flex-col sm:flex-row">
                         {/* Image Section */}
-                        <div className="sm:w-2/5 relative h-80 sm:h-full">
+                        <div className="sm:w-2/5 relative h-64 sm:h-80 md:h-96">
                           <div className="absolute inset-0 overflow-hidden bg-gray-100">
                             <img
                               src={member.image}

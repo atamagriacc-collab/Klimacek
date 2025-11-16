@@ -412,7 +412,7 @@ export default function WeatherStations() {
         {/* Map Section */}
         <div className="relative">
           {/* City Selector - Floating on Map */}
-          <div className="absolute top-4 right-4 z-30 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-4 w-56">
+          <div className="absolute top-4 right-4 z-30 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-3 sm:p-4 w-48 sm:w-56">
             <h3 className="font-semibold text-gray-800 mb-3 text-sm">Kabupaten/Kota</h3>
             <div className="space-y-1 max-h-64 overflow-y-auto">
               {cities.map((city) => {
@@ -484,7 +484,7 @@ export default function WeatherStations() {
             </div>
 
             {/* Metrics Grid - All Sensors */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
               {stationMetrics.map((metric, index) => (
                 <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                   <div className="flex justify-between items-start mb-4">
@@ -594,9 +594,9 @@ export default function WeatherStations() {
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
               </div>
             ) : (
-              <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-hide scroll-smooth">
                 {weatherForecast.slice(0, 12).map((forecast, index) => (
-                  <div key={index} className="flex-shrink-0 text-center min-w-[70px]">
+                  <div key={index} className="flex-shrink-0 text-center min-w-[80px]">
                     <p className="text-gray-400 text-xs mb-2">{forecast.time}</p>
                     <div className="bg-gray-800 rounded-lg p-3 hover:bg-gray-750 transition">
                       <div className="flex justify-center mb-2">

@@ -537,9 +537,9 @@ export default function SensorDetail() {
             {/* Chart Card */}
             <div className="bg-white rounded-2xl shadow-2xl p-8">
               {/* Header with current value */}
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h1 className="text-3xl font-bold text-gray-900">{getSensorTitle()}</h1>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+                <div className="flex-1">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{getSensorTitle()}</h1>
                   <div className="flex items-center space-x-2 mt-2">
                     <Clock className="w-4 h-4 text-gray-400" />
                     {lastUpdate ? (
@@ -566,13 +566,13 @@ export default function SensorDetail() {
                     )}
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="md:text-right">
                   <div className="flex items-center space-x-2">
                     <Activity className="w-5 h-5 text-gray-400" />
-                    <span className="text-3xl font-bold text-gray-900">
+                    <span className="text-2xl sm:text-3xl font-bold text-gray-900">
                       {currentValue.toFixed(1)}
                     </span>
-                    <span className="text-lg text-gray-600">
+                    <span className="text-base sm:text-lg text-gray-600">
                       {getSensorUnit(sensorType as string)}
                     </span>
                   </div>
@@ -666,7 +666,7 @@ export default function SensorDetail() {
 
               {/* Statistics */}
               {recommendation?.statistics && (
-                <div className="grid grid-cols-4 gap-4 mb-8 p-4 bg-gray-50 rounded-lg">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 p-4 bg-gray-50 rounded-lg">
                   <div>
                     <p className="text-xs text-gray-500">Minimum</p>
                     <p className="text-lg font-semibold text-gray-900">
@@ -864,7 +864,7 @@ export default function SensorDetail() {
                     <button
                       key={interval.value}
                       onClick={() => setTimeInterval(interval.value)}
-                      className={`px-4 py-2.5 rounded-lg font-medium text-sm transition-all ${
+                      className={`px-2 sm:px-4 py-2 sm:py-2.5 rounded-lg font-medium text-xs sm:text-sm transition-all ${
                         timeInterval === interval.value
                           ? 'bg-green-600 text-white shadow-lg shadow-green-600/30'
                           : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-green-300'
