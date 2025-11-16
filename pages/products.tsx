@@ -732,37 +732,38 @@ export default function Products() {
 
       {/* Product Showcase Section */}
       <div className="bg-gray-50 py-8 sm:py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-12">
-            <div className="grid grid-cols-1 gap-8 sm:gap-12">
-              {/* Image - Full Width and Large */}
-              <div className="flex justify-center">
-                <img
-                  src={products[0].image || '/images/p2mw 2.png'}
-                  alt={products[0].name}
-                  className="w-full h-auto max-w-4xl"
-                />
-              </div>
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
+                <div className="flex justify-center order-2 md:order-1">
+                  <img
+                    src={products[0].image || '/images/p2mw 2.png'}
+                    alt={products[0].name}
+                    className="w-full h-auto transform scale-200 origin-center"
+                    style={{ transform: 'scale(2)' }}
+                  />
+                </div>
 
-              {/* Content Below Image */}
-              <div className="text-center max-w-4xl mx-auto">
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
-                  {products[0].name}
-                </h2>
-                <p className="text-gray-600 mb-6 sm:mb-8 text-base sm:text-lg">
-                  {products[0].description}
-                </p>
+                <div className="text-center md:text-left order-1 md:order-2">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+                    {products[0].name}
+                  </h2>
+                  <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+                    {products[0].description}
+                  </p>
 
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-xl mb-3 sm:mb-4">Spesifikasi</h3>
-                  <ul className="space-y-2 sm:space-y-3 text-left max-w-2xl mx-auto">
-                    {products[0].specifications.map((spec, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-green-500 mr-3 flex-shrink-0 text-xl">✓</span>
-                        <span className="text-sm sm:text-base text-gray-700">{spec}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2 sm:mb-3">Spesifikasi</h3>
+                    <ul className="space-y-1 sm:space-y-2">
+                      {products[0].specifications.map((spec, index) => (
+                        <li key={index} className="flex items-start text-left">
+                          <span className="text-gray-400 mr-2 flex-shrink-0">•</span>
+                          <span className="text-xs sm:text-sm text-gray-600">{spec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
