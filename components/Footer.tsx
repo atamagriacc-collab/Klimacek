@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-klimacek-brown-900 via-klimacek-brown-800 to-klimacek-brown-900 text-white mt-16">
+    <footer className="bg-gradient-to-br from-klimacek-brown-900 via-klimacek-brown-800 to-klimacek-brown-900 text-white">
       {/* Main Footer Content */}
       <div className="border-t-4 border-accent-yellow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
