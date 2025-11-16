@@ -67,10 +67,30 @@ interface FirebaseSensorData {
   received_at?: string;
 }
 
+// Time interval options
+type TimeInterval = '1m' | '5m' | '10m' | '30m' | '1h' | '24h' | '7d' | '30d';
+
+interface TimeIntervalOption {
+  value: TimeInterval;
+  label: string;
+  shortLabel: string;
+}
+
+const TIME_INTERVALS: TimeIntervalOption[] = [
+  { value: '1m', label: '1 Menit', shortLabel: '1m' },
+  { value: '5m', label: '5 Menit', shortLabel: '5m' },
+  { value: '10m', label: '10 Menit', shortLabel: '10m' },
+  { value: '30m', label: '30 Menit', shortLabel: '30m' },
+  { value: '1h', label: '1 Jam', shortLabel: '1h' },
+  { value: '24h', label: '24 Jam', shortLabel: '24h' },
+  { value: '7d', label: '7 Hari', shortLabel: '7d' },
+  { value: '30d', label: '30 Hari', shortLabel: '30d' }
+];
+
 export default function SensorDetail() {
   const router = useRouter();
   const { sensorType = 'kelembapan' } = router.query;
-  const [timeInterval, setTimeInterval] = useState('24h');
+  const [timeInterval, setTimeInterval] = useState<TimeInterval>('24h');
   const [sensorData, setSensorData] = useState<SensorDataPoint[]>([]);
   const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
   const [loading, setLoading] = useState(true);
@@ -146,6 +166,143 @@ export default function SensorDetail() {
     return domainMap[type as string] || [Math.floor(min - padding), Math.ceil(max + padding)];
   };
 
+  // Get time range in milliseconds
+  const getTimeRangeMs = (interval: TimeInterval): number => {
+    const ranges: { [key in TimeInterval]: number } = {
+      '1m': 1 * 60 * 1000,
+      '5m': 5 * 60 * 1000,
+      '10m': 10 * 60 * 1000,
+      '30m': 30 * 60 * 1000,
+      '1h': 1 * 60 * 60 * 1000,
+      '24h': 24 * 60 * 60 * 1000,
+      '7d': 7 * 24 * 60 * 60 * 1000,
+      '30d': 30 * 24 * 60 * 60 * 1000
+    };
+    return ranges[interval];
+  };
+
+  // Get data point limit for Firebase query
+  const getDataLimit = (interval: TimeInterval): number => {
+    const limits: { [key in TimeInterval]: number } = {
+      '1m': 60,      // 1 per second
+      '5m': 300,     // 1 per second
+      '10m': 600,    // 1 per second
+      '30m': 360,    // 1 per 5 seconds
+      '1h': 720,     // 1 per 5 seconds
+      '24h': 288,    // 1 per 5 minutes
+      '7d': 2016,    // 1 per 5 minutes
+      '30d': 8640    // 1 per 5 minutes
+    };
+    return limits[interval];
+  };
+
+  // Format time string based on interval
+  const formatTimeLabel = (date: Date, interval: TimeInterval): string => {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+
+    switch (interval) {
+      case '1m':
+      case '5m':
+      case '10m':
+        return `${hours}:${minutes}:${seconds}`;
+      case '30m':
+      case '1h':
+        return `${hours}:${minutes}`;
+      case '24h':
+        return `${hours}:${minutes}`;
+      case '7d':
+        return `${day}/${month} ${hours}:00`;
+      case '30d':
+        return `${day}/${month}`;
+      default:
+        return `${hours}:${minutes}`;
+    }
+  };
+
+  // Aggregate data based on interval
+  const aggregateData = (chartData: SensorDataPoint[], interval: TimeInterval): SensorDataPoint[] => {
+    // No aggregation needed for short intervals
+    if (['1m', '5m', '10m', '30m'].includes(interval)) {
+      return chartData;
+    }
+
+    // Aggregate to hourly for 1h, 24h
+    if (interval === '1h' || interval === '24h') {
+      if (chartData.length <= 100) return chartData;
+
+      const hourlyData: { [key: string]: { sum: number; count: number; timestamp: string } } = {};
+
+      chartData.forEach(point => {
+        const date = new Date(point.timestamp);
+        const hourKey = `${date.getHours().toString().padStart(2, '0')}:00`;
+
+        if (!hourlyData[hourKey]) {
+          hourlyData[hourKey] = { sum: 0, count: 0, timestamp: point.timestamp };
+        }
+        hourlyData[hourKey].sum += point.value;
+        hourlyData[hourKey].count++;
+      });
+
+      return Object.keys(hourlyData).map(key => ({
+        time: key,
+        value: hourlyData[key].sum / hourlyData[key].count,
+        timestamp: hourlyData[key].timestamp
+      }));
+    }
+
+    // Aggregate to hourly for 7d
+    if (interval === '7d') {
+      if (chartData.length <= 168) return chartData;
+
+      const hourlyData: { [key: string]: { sum: number; count: number; timestamp: string } } = {};
+
+      chartData.forEach(point => {
+        const date = new Date(point.timestamp);
+        const hourKey = `${date.getDate()}/${date.getMonth() + 1} ${date.getHours()}:00`;
+
+        if (!hourlyData[hourKey]) {
+          hourlyData[hourKey] = { sum: 0, count: 0, timestamp: point.timestamp };
+        }
+        hourlyData[hourKey].sum += point.value;
+        hourlyData[hourKey].count++;
+      });
+
+      return Object.keys(hourlyData).map(key => ({
+        time: key,
+        value: hourlyData[key].sum / hourlyData[key].count,
+        timestamp: hourlyData[key].timestamp
+      }));
+    }
+
+    // Aggregate to daily for 30d
+    if (interval === '30d') {
+      const dailyData: { [key: string]: { sum: number; count: number; timestamp: string } } = {};
+
+      chartData.forEach(point => {
+        const date = new Date(point.timestamp);
+        const dayKey = `${date.getDate()}/${date.getMonth() + 1}`;
+
+        if (!dailyData[dayKey]) {
+          dailyData[dayKey] = { sum: 0, count: 0, timestamp: point.timestamp };
+        }
+        dailyData[dayKey].sum += point.value;
+        dailyData[dayKey].count++;
+      });
+
+      return Object.keys(dailyData).map(key => ({
+        time: key,
+        value: dailyData[key].sum / dailyData[key].count,
+        timestamp: dailyData[key].timestamp
+      }));
+    }
+
+    return chartData;
+  };
+
   // Fetch data from Firebase
   useEffect(() => {
     if (!db || !sensorType) {
@@ -154,7 +311,7 @@ export default function SensorDetail() {
     }
 
     const sensorDataRef = ref(db, 'sensor_data');
-    const limit = timeInterval === '24h' ? 288 : 2016; // 24h: every 5 min, 7d: every 5 min
+    const limit = getDataLimit(timeInterval);
 
     const recentDataQuery = query(
       sensorDataRef,
@@ -184,23 +341,15 @@ export default function SensorDetail() {
 
         // Filter data based on time interval
         const now = new Date();
-        const cutoffTime = timeInterval === '24h'
-          ? new Date(now.getTime() - 24 * 60 * 60 * 1000)
-          : new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const cutoffTime = new Date(now.getTime() - getTimeRangeMs(timeInterval));
 
         dataArray.forEach((item) => {
           const timestamp = new Date(item.received_at || item.timestamp);
           if (timestamp >= cutoffTime) {
             const value = (item as any)[sensorField];
             if (value !== undefined && value !== null) {
-              const hours = timestamp.getHours();
-              const minutes = timestamp.getMinutes();
-              const timeStr = timeInterval === '24h'
-                ? `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
-                : `${timestamp.getDate()}/${timestamp.getMonth() + 1} ${hours}:00`;
-
               chartData.push({
-                time: timeStr,
+                time: formatTimeLabel(timestamp, timeInterval),
                 value: parseFloat(value),
                 timestamp: timestamp.toISOString()
               });
@@ -208,29 +357,8 @@ export default function SensorDetail() {
           }
         });
 
-        // Aggregate data if too many points
-        let finalData = chartData;
-        if (timeInterval === '7d' && chartData.length > 168) {
-          // Aggregate to hourly data for 7-day view
-          const hourlyData: { [key: string]: { sum: number; count: number; timestamp: string } } = {};
-
-          chartData.forEach(point => {
-            const date = new Date(point.timestamp);
-            const hourKey = `${date.getDate()}/${date.getMonth() + 1} ${date.getHours()}:00`;
-
-            if (!hourlyData[hourKey]) {
-              hourlyData[hourKey] = { sum: 0, count: 0, timestamp: point.timestamp };
-            }
-            hourlyData[hourKey].sum += point.value;
-            hourlyData[hourKey].count++;
-          });
-
-          finalData = Object.keys(hourlyData).map(key => ({
-            time: key,
-            value: hourlyData[key].sum / hourlyData[key].count,
-            timestamp: hourlyData[key].timestamp
-          }));
-        }
+        // Aggregate data if needed
+        const finalData = aggregateData(chartData, timeInterval);
 
         setSensorData(finalData);
 
@@ -285,6 +413,12 @@ export default function SensorDetail() {
     }
   };
 
+  // Get interval label for display
+  const getIntervalLabel = (interval: TimeInterval): string => {
+    const intervalOption = TIME_INTERVALS.find(i => i.value === interval);
+    return intervalOption ? intervalOption.label : interval;
+  };
+
   // Download data as Excel
   const handleDownload = () => {
     // Create worksheet data
@@ -295,7 +429,7 @@ export default function SensorDetail() {
     worksheetData.push([]);
     worksheetData.push(['Jenis Sensor:', getSensorTitle()]);
     worksheetData.push(['Satuan:', getSensorUnit(sensorType as string)]);
-    worksheetData.push(['Periode:', timeInterval === '24h' ? '24 Jam Terakhir' : '7 Hari Terakhir']);
+    worksheetData.push(['Periode:', getIntervalLabel(timeInterval)]);
     worksheetData.push(['Tanggal Export:', new Date().toLocaleString('id-ID')]);
     worksheetData.push([]);
 
@@ -406,7 +540,31 @@ export default function SensorDetail() {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">{getSensorTitle()}</h1>
-                  <p className="text-sm text-gray-500 mt-1">Last update: {formatUpdateTime(lastUpdate)}</p>
+                  <div className="flex items-center space-x-2 mt-2">
+                    <Clock className="w-4 h-4 text-gray-400" />
+                    {lastUpdate ? (
+                      <div className="text-sm">
+                        <span className="text-gray-600 font-medium">
+                          {lastUpdate.toLocaleDateString('id-ID', {
+                            day: '2-digit',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                        <span className="text-gray-400 mx-2">•</span>
+                        <span className="text-gray-600 font-medium">
+                          {lastUpdate.toLocaleTimeString('id-ID', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                          })}
+                        </span>
+                        <span className="text-gray-400 ml-2">({formatUpdateTime(lastUpdate)})</span>
+                      </div>
+                    ) : (
+                      <span className="text-sm text-gray-400">No data available</span>
+                    )}
+                  </div>
                 </div>
                 <div className="text-right">
                   <div className="flex items-center space-x-2">
@@ -466,12 +624,28 @@ export default function SensorDetail() {
                         contentStyle={{
                           backgroundColor: 'rgba(255, 255, 255, 0.95)',
                           border: '1px solid #e5e7eb',
-                          borderRadius: '8px'
+                          borderRadius: '8px',
+                          padding: '12px'
                         }}
-                        formatter={(value: any) => [
+                        formatter={(value: any, name: any, props: any) => [
                           `${parseFloat(value).toFixed(2)} ${getSensorUnit(sensorType as string)}`,
                           getSensorTitle()
                         ]}
+                        labelFormatter={(label: string, payload: any) => {
+                          if (payload && payload[0] && payload[0].payload.timestamp) {
+                            const date = new Date(payload[0].payload.timestamp);
+                            return `${date.toLocaleDateString('id-ID', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric'
+                            })} - ${date.toLocaleTimeString('id-ID', {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              second: '2-digit'
+                            })}`;
+                          }
+                          return label;
+                        }}
                       />
                       <Line
                         type="monotone"
@@ -522,6 +696,81 @@ export default function SensorDetail() {
                     <p className="text-lg font-semibold text-gray-900">
                       {recommendation.statistics.latest.toFixed(1)} {getSensorUnit(sensorType as string)}
                     </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Recent Data Table */}
+              {sensorData.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <Clock className="w-5 h-5 mr-2 text-gray-600" />
+                    Data Terbaru (10 Pembacaan Terakhir)
+                  </h3>
+                  <div className="overflow-x-auto bg-white border border-gray-200 rounded-lg">
+                    <table className="min-w-full divide-y divide-gray-200">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            No
+                          </th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Tanggal & Waktu
+                          </th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Nilai
+                          </th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {sensorData.slice(-10).reverse().map((point, index) => {
+                          const date = new Date(point.timestamp);
+                          const isLatest = index === 0;
+                          return (
+                            <tr key={index} className={isLatest ? 'bg-green-50' : 'hover:bg-gray-50'}>
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {index + 1}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm text-gray-900 font-medium">
+                                  {date.toLocaleDateString('id-ID', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric'
+                                  })}
+                                </div>
+                                <div className="text-xs text-gray-500">
+                                  {date.toLocaleTimeString('id-ID', {
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit'
+                                  })}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm font-semibold text-gray-900">
+                                  {point.value.toFixed(2)} {getSensorUnit(sensorType as string)}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                {isLatest ? (
+                                  <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Terbaru
+                                  </span>
+                                ) : (
+                                  <span className="text-xs text-gray-400">
+                                    {formatUpdateTime(date)}
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               )}
@@ -607,15 +856,31 @@ export default function SensorDetail() {
                 )}
               </div>
 
+              {/* Time Interval Selector */}
+              <div className="mb-8">
+                <h3 className="text-sm font-medium text-gray-700 mb-3">Pilih Periode Waktu:</h3>
+                <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
+                  {TIME_INTERVALS.map((interval) => (
+                    <button
+                      key={interval.value}
+                      onClick={() => setTimeInterval(interval.value)}
+                      className={`px-4 py-2.5 rounded-lg font-medium text-sm transition-all ${
+                        timeInterval === interval.value
+                          ? 'bg-green-600 text-white shadow-lg shadow-green-600/30'
+                          : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-green-300'
+                      }`}
+                    >
+                      {interval.shortLabel}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  Menampilkan data: {TIME_INTERVALS.find(i => i.value === timeInterval)?.label}
+                </p>
+              </div>
+
               {/* Action Buttons */}
-              <div className="flex justify-end space-x-4">
-                <button
-                  onClick={() => setTimeInterval(timeInterval === '24h' ? '7d' : '24h')}
-                  className="px-6 py-3 bg-white border-2 border-gray-300 rounded-full font-medium text-gray-700 hover:bg-gray-50 transition flex items-center space-x-2"
-                >
-                  <Clock className="w-5 h-5" />
-                  <span>{timeInterval === '24h' ? 'Last 24 Hours' : 'Last 7 Days'}</span>
-                </button>
+              <div className="flex justify-end">
                 <button
                   onClick={handleDownload}
                   className="px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition flex items-center space-x-2"
