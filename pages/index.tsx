@@ -132,8 +132,8 @@ export default function Home() {
                     });
 
                     // Track download with Google Analytics (if available)
-                    if (typeof gtag !== 'undefined') {
-                      gtag('event', 'download', {
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'download', {
                         event_category: 'APK',
                         event_label: 'KlimacekApp v1.0.1'
                       });
