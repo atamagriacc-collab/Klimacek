@@ -356,12 +356,12 @@ export default function About() {
                       {/* Card Content */}
                       <div className="flex flex-col sm:flex-row">
                         {/* Image Section */}
-                        <div className="sm:w-2/5 relative h-64 sm:h-80 md:h-96">
+                        <div className="sm:w-2/5 relative h-80 sm:h-80 md:h-96">
                           <div className="absolute inset-0 overflow-hidden bg-gray-100">
                             <img
                               src={member.image}
                               alt={member.name}
-                              className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+                              className="w-full h-full object-contain sm:object-cover sm:object-top transform group-hover:scale-105 transition-transform duration-500"
                             />
                             {/* Gradient Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent"></div>
