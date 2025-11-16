@@ -16,5 +16,9 @@
   "functions": {
     "source": "functions",
     "runtime": "nodejs20"
+  },
+  "appDistribution": {
+    "app": "1:745512120451:android:4d84f1bdd1882cd875ebb6",
+    "releaseNotesFile": "release-notes.txt"
   }
 }

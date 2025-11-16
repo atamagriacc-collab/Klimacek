@@ -17,16 +17,20 @@ import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private ImageView btnLogout;
+    private FirebaseAuth mAuth;
     private CardView cardIntensitasCahaya;
     private CardView cardKelembapan;
     private CardView cardKecepatanAngin;
@@ -73,6 +77,9 @@ public class HomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
 
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
         apiClient = new ApiClient();
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -84,6 +91,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        btnLogout = findViewById(R.id.btnLogout);
+
         cardIntensitasCahaya = findViewById(R.id.cardIntensitasCahaya);
         cardKelembapan = findViewById(R.id.cardKelembapan);
         cardKecepatanAngin = findViewById(R.id.cardKecepatanAngin);
@@ -118,6 +127,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
+        // Logout button
+        btnLogout.setOnClickListener(v -> {
+            mAuth.signOut();
+            Toast.makeText(HomeActivity.this, "Logout berhasil", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+
         cardIntensitasCahaya.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, SensorDetailActivity.class);
             intent.putExtra("sensor_name", "Intensitas Cahaya");

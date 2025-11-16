@@ -193,3 +193,4 @@ secrets/
 config/secrets/
 
 NUL
+public/downloads/*.apk

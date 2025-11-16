@@ -1,0 +1,25 @@
+KlimacekApp v1.0.1 - Firebase Authentication Update
+
+New Features:
+✨ Firebase Authentication integration
+✨ User Login with email and password
+✨ User Registration (Sign Up)
+✨ Logout functionality
+✨ Session persistence (auto-login)
+
+Features:
+📊 Real-time sensor data monitoring
+🌡️ Weather station integration
+💡 Solar panel monitoring
+📱 Clean and modern UI
+
+Bug Fixes:
+🐛 Improved error handling for authentication
+🐛 Better user experience with loading states
+
+Next Steps:
+1. Install the APK on your Android device
+2. Sign up with your email and password
+3. Login and start monitoring your sensors!
+
+Note: This is a beta version for testing purposes.

@@ -194,7 +194,7 @@ export default function Products() {
         'Baterai backup 72 jam',
         'Garansi 6 bulan'
       ],
-      image: '/images/p2mw 2.png'
+      image: '/images/klimastation.png'
     }
   ];
 

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import { useAuth } from '../lib/auth-context';
+import { track } from '@vercel/analytics';
 import {
   Download,
   Leaf,
@@ -119,9 +120,31 @@ export default function Home() {
                   Mengakses aplikasi yang digunakan untuk memonitoring hasil dari stasiun cuaca Climagrid berupa kemitaban, sejarah kemitaban, intensitas cahaya, curah hujan, kecepatan angin, arus panel surya, tegangan panel surya, dan watt panel surya untuk menghitung potensi sinar matahari.
                 </p>
 
-                <button className="w-full bg-gray-900 text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-full font-medium hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2 text-sm sm:text-base">
-                  <span>Download</span>
-                </button>
+                <a
+                  href="/downloads/klimacek-v1.0.1.apk"
+                  download="KlimacekApp-v1.0.1.apk"
+                  onClick={() => {
+                    // Track download with Vercel Analytics
+                    track('APK Download', {
+                      version: '1.0.1',
+                      platform: 'Android',
+                      size: '11.8 MB'
+                    });
+
+                    // Track download with Google Analytics (if available)
+                    if (typeof gtag !== 'undefined') {
+                      gtag('event', 'download', {
+                        event_category: 'APK',
+                        event_label: 'KlimacekApp v1.0.1'
+                      });
+                    }
+                  }}
+                  className="w-full bg-gray-900 text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-full font-medium hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2 text-sm sm:text-base"
+                >
+                  <Download className="w-5 h-5" />
+                  <span>Download APK</span>
+                  <span className="text-xs opacity-75">(11.8 MB)</span>
+                </a>
               </div>
             </div>
           </div>
