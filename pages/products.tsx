@@ -740,7 +740,7 @@ export default function Products() {
                   <img
                     src={products[0].image || '/images/p2mw 2.png'}
                     alt={products[0].name}
-                    className="w-48 sm:w-56 md:w-64 h-auto"
+                    className="w-72 sm:w-80 md:w-96 lg:w-full h-auto max-w-lg"
                   />
                 </div>
 
