@@ -42,6 +42,9 @@ export default function Home() {
               <Link href="/products" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
                 Produk & Layanan
               </Link>
+              <Link href="/articles" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                Artikel
+              </Link>
               <Link href="/about" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
                 Tentang Kami
               </Link>

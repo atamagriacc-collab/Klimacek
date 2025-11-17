@@ -135,6 +135,9 @@ export default function About() {
                 <Link href="/products" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
                   Produk & Layanan
                 </Link>
+                <Link href="/articles" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                  Artikel
+                </Link>
                 <Link href="/about" className="text-white font-medium text-sm lg:text-base">
                   Tentang Kami
                 </Link>
@@ -207,6 +210,13 @@ export default function About() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Produk & Layanan
+                </Link>
+                <Link
+                  href="/articles"
+                  className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Artikel
                 </Link>
                 <Link
                   href="/about"
@@ -354,14 +364,14 @@ export default function About() {
                     {/* Card */}
                     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-1">
                       {/* Card Content */}
-                      <div className="flex flex-col sm:flex-row">
+                      <div className="flex flex-col sm:flex-row sm:h-full">
                         {/* Image Section */}
-                        <div className="sm:w-2/5 relative h-80 sm:h-80 md:h-96">
+                        <div className="sm:w-2/5 relative h-80 sm:h-auto">
                           <div className="absolute inset-0 overflow-hidden bg-gray-100">
                             <img
                               src={member.image}
                               alt={member.name}
-                              className="w-full h-full object-contain sm:object-cover sm:object-top transform group-hover:scale-105 transition-transform duration-500"
+                              className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-500"
                             />
                             {/* Gradient Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent"></div>

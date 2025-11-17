@@ -141,3 +141,117 @@ exports.createUser = functions.https.onRequest((request, response) => {
     }
   });
 });
+
+// Auto-assign free trial to new users
+exports.onUserCreate = functions.auth.user().onCreate(async (user) => {
+  try {
+    const createdAt = Date.now();
+    const trialDuration = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+    const trialExpiresAt = createdAt + trialDuration;
+
+    // Set custom claim for free trial subscription
+    const subscriptionClaim = {
+      plan: 'free_trial',
+      trial_expires_at: trialExpiresAt,
+      created_at: createdAt
+    };
+
+    await admin.auth().setCustomUserClaims(user.uid, {
+      subscription: subscriptionClaim
+    });
+
+    // Also store in Realtime Database for backup/reference
+    await admin.database().ref(`users/${user.uid}/subscription`).set({
+      ...subscriptionClaim,
+      last_updated: admin.database.ServerValue.TIMESTAMP
+    });
+
+    console.log(`Free trial assigned to user ${user.email} (${user.uid})`);
+    console.log(`Trial expires at: ${new Date(trialExpiresAt).toISOString()}`);
+
+    return null;
+  } catch (error) {
+    console.error('Error assigning free trial:', error);
+    return null;
+  }
+});
+
+// Manual function to set subscription for existing users
+// Call this via: POST https://YOUR_REGION-YOUR_PROJECT.cloudfunctions.net/setUserSubscription
+// Body: { "email": "user@example.com", "plan": "free_trial", "durationDays": 30 }
+exports.setUserSubscription = functions.https.onRequest((request, response) => {
+  cors(request, response, async () => {
+    try {
+      // Only allow POST
+      if (request.method !== 'POST') {
+        return response.status(405).json({
+          success: false,
+          message: 'Method not allowed. Use POST.'
+        });
+      }
+
+      const { email, plan = 'free_trial', durationDays = 30 } = request.body;
+
+      if (!email) {
+        return response.status(400).json({
+          success: false,
+          message: 'Email is required'
+        });
+      }
+
+      // Get user by email
+      const user = await admin.auth().getUserByEmail(email);
+
+      const createdAt = Date.now();
+      const duration = durationDays * 24 * 60 * 60 * 1000;
+      const expiresAt = createdAt + duration;
+
+      // Set custom claim for subscription
+      const subscriptionClaim = {
+        plan: plan,
+        trial_expires_at: expiresAt,
+        created_at: createdAt
+      };
+
+      await admin.auth().setCustomUserClaims(user.uid, {
+        subscription: subscriptionClaim
+      });
+
+      // Also store in Realtime Database
+      await admin.database().ref(`users/${user.uid}/subscription`).set({
+        ...subscriptionClaim,
+        last_updated: admin.database.ServerValue.TIMESTAMP
+      });
+
+      console.log(`Subscription set for user ${email} (${user.uid})`);
+      console.log(`Plan: ${plan}, Expires: ${new Date(expiresAt).toISOString()}`);
+
+      return response.status(200).json({
+        success: true,
+        message: 'Subscription set successfully',
+        data: {
+          uid: user.uid,
+          email: user.email,
+          plan: plan,
+          expires_at: new Date(expiresAt).toISOString(),
+          duration_days: durationDays
+        }
+      });
+
+    } catch (error) {
+      console.error('Error setting subscription:', error);
+
+      if (error.code === 'auth/user-not-found') {
+        return response.status(404).json({
+          success: false,
+          message: 'User not found'
+        });
+      }
+
+      return response.status(500).json({
+        success: false,
+        message: error.message
+      });
+    }
+  });
+});

@@ -293,6 +293,9 @@ export default function Products() {
                 <Link href="/products" className="text-white font-medium text-sm lg:text-base">
                   Produk & Layanan
                 </Link>
+                <Link href="/articles" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
+                  Artikel
+                </Link>
                 <Link href="/about" className="text-white/90 hover:text-white transition-colors text-sm lg:text-base">
                   Tentang Kami
                 </Link>
@@ -365,6 +368,13 @@ export default function Products() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Produk & Layanan
+                </Link>
+                <Link
+                  href="/articles"
+                  className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Artikel
                 </Link>
                 <Link
                   href="/about"

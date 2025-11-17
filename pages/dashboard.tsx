@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Plane, Settings, LogOut, Shield, Plus, CloudRain, Wind, Sun, Thermometer, Droplets, Battery, Activity, RefreshCw, MapPin, Wifi, WifiOff, Edit2, Trash2, Save, X, User, Mail, Phone, Lock, CheckCircle, AlertCircle, Menu } from 'lucide-react';
+import { Home, Plane, Settings, LogOut, Shield, Plus, CloudRain, Wind, Sun, Thermometer, Droplets, Battery, Activity, RefreshCw, MapPin, Wifi, WifiOff, Edit2, Trash2, Save, X, User, Mail, Phone, Lock, CheckCircle, AlertCircle, Menu, Crown, Clock } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import ProtectedRoute from '../components/ProtectedRoute';
@@ -15,6 +15,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import dynamic from 'next/dynamic';
 import TurnstileVerification from '../components/TurnstileVerification';
+import { getSubscriptionInfo, formatPlanName, getPlanBadgeColor, SubscriptionInfo } from '../lib/subscription-utils';
 
 const DroneControl = dynamic(() => import('../components/drone-control'), {
   ssr: false
@@ -76,6 +77,22 @@ export default function Dashboard() {
   const [settingsSaved, setSettingsSaved] = useState(false);
   const [settingsError, setSettingsError] = useState('');
   const [verificationSent, setVerificationSent] = useState(false);
+
+  // Subscription info
+  const [subscriptionInfo, setSubscriptionInfo] = useState<SubscriptionInfo>({
+    plan: 'none',
+    is_active: false,
+    is_expired: false
+  });
+
+  // Load subscription info
+  useEffect(() => {
+    if (user) {
+      getSubscriptionInfo(user).then(info => {
+        setSubscriptionInfo(info);
+      });
+    }
+  }, [user]);
 
   // Check user profile completion and email verification
   useEffect(() => {
@@ -340,6 +357,45 @@ export default function Dashboard() {
   };
 
   const renderContent = () => {
+    // Check if trial is expired
+    if (subscriptionInfo.is_expired && active !== 'settings') {
+      return (
+        <div className="flex items-center justify-center min-h-[60vh] p-4">
+          <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 max-w-md w-full border-2 border-red-500">
+            <div className="flex items-center gap-3 mb-4">
+              <AlertCircle className="w-8 h-8 text-red-500" />
+              <h2 className="text-xl font-bold text-gray-800">Trial Expired</h2>
+            </div>
+            <p className="text-gray-600 mb-4">
+              Your free trial has expired. Please upgrade to a paid plan to continue using Klimacek services.
+            </p>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center gap-2 text-sm text-red-700">
+                <Clock className="w-4 h-4" />
+                <span>Trial ended on {subscriptionInfo.trial_expires_at ? new Date(subscriptionInfo.trial_expires_at).toLocaleDateString('id-ID') : 'N/A'}</span>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <Button
+                onClick={() => router.push('/pricing')}
+                className="w-full bg-green-600 hover:bg-green-700"
+              >
+                <Crown className="w-4 h-4 mr-2" />
+                Upgrade Now
+              </Button>
+              <Button
+                onClick={() => setActive('settings')}
+                variant="outline"
+                className="w-full"
+              >
+                View Account Settings
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     // Check if profile is complete before allowing access to certain sections
     if (!profileComplete && active !== 'settings') {
       if (active === 'dashboard' || active === 'drone-control') {
@@ -569,6 +625,61 @@ export default function Dashboard() {
           <div className="space-y-6">
             <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
               <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">User Settings</h2>
+
+              {/* Subscription Info */}
+              {subscriptionInfo.plan !== 'none' && (
+                <div className={`mb-6 p-4 rounded-lg border-2 ${
+                  subscriptionInfo.is_expired
+                    ? 'bg-red-50 border-red-500'
+                    : subscriptionInfo.plan === 'free_trial'
+                    ? 'bg-yellow-50 border-yellow-500'
+                    : 'bg-blue-50 border-blue-500'
+                }`}>
+                  <div className="flex items-start gap-3">
+                    <Crown className={`w-6 h-6 mt-0.5 ${
+                      subscriptionInfo.is_expired ? 'text-red-600' : 'text-yellow-600'
+                    }`} />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h4 className={`font-semibold ${
+                          subscriptionInfo.is_expired ? 'text-red-800' : 'text-gray-800'
+                        }`}>
+                          {formatPlanName(subscriptionInfo.plan)}
+                        </h4>
+                        <span className={`text-xs font-semibold px-2 py-0.5 rounded ${getPlanBadgeColor(subscriptionInfo.plan, subscriptionInfo.is_expired)} text-white`}>
+                          {subscriptionInfo.is_expired ? 'EXPIRED' : 'ACTIVE'}
+                        </span>
+                      </div>
+                      {subscriptionInfo.plan === 'free_trial' && (
+                        <>
+                          {!subscriptionInfo.is_expired ? (
+                            <div className="space-y-1">
+                              <p className="text-sm text-gray-700">
+                                Your free trial is active with <strong>{subscriptionInfo.days_remaining} days</strong> remaining.
+                              </p>
+                              <p className="text-xs text-gray-600">
+                                Trial expires on: {subscriptionInfo.trial_expires_at ? new Date(subscriptionInfo.trial_expires_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : 'N/A'}
+                              </p>
+                            </div>
+                          ) : (
+                            <p className="text-sm text-red-700">
+                              Your free trial has expired. Upgrade to continue using Klimacek services.
+                            </p>
+                          )}
+                          <Button
+                            onClick={() => router.push('/pricing')}
+                            className="mt-3 bg-green-600 hover:bg-green-700 text-white"
+                            size="sm"
+                          >
+                            <Crown className="w-4 h-4 mr-2" />
+                            Upgrade Plan
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Profile Completion Status */}
               {!profileComplete && (
@@ -997,7 +1108,7 @@ export default function Dashboard() {
             <div className="p-4 border-t border-green-600/20 space-y-1 mt-auto">
               {/* User Profile Info */}
               <div className="mb-3 px-3 py-2 bg-white/10 rounded-lg">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mb-2">
                   <User className="w-4 h-4 text-green-100" />
                   <div className="flex-1 min-w-0">
                     <p className="text-white text-sm font-medium truncate">
@@ -1011,6 +1122,28 @@ export default function Dashboard() {
                     </span>
                   )}
                 </div>
+                {/* Subscription Badge */}
+                {subscriptionInfo.plan !== 'none' && (
+                  <div className="mt-2 pt-2 border-t border-green-600/20">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-1.5">
+                        <Crown className="w-3 h-3 text-yellow-300" />
+                        <span className={`text-xs font-semibold px-2 py-0.5 rounded ${getPlanBadgeColor(subscriptionInfo.plan, subscriptionInfo.is_expired)} text-white`}>
+                          {formatPlanName(subscriptionInfo.plan)}
+                        </span>
+                      </div>
+                      {subscriptionInfo.plan === 'free_trial' && !subscriptionInfo.is_expired && (
+                        <div className="flex items-center gap-1 text-xs text-green-100">
+                          <Clock className="w-3 h-3" />
+                          <span>{subscriptionInfo.days_remaining}d</span>
+                        </div>
+                      )}
+                      {subscriptionInfo.is_expired && (
+                        <span className="text-xs text-red-300 font-medium">Expired</span>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {isAdmin && (

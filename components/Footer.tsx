@@ -7,7 +7,7 @@ export default function Footer() {
       {/* Main Footer Content */}
       <div className="border-t-4 border-accent-yellow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
 
             {/* Company Info */}
             <div className="lg:col-span-1">
@@ -68,6 +68,12 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/articles" className="text-klimacek-brown-100 hover:text-accent-yellow transition-colors duration-200 flex items-center group">
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-accent-yellow transition-all duration-200 mr-0 group-hover:mr-2"></span>
+                    Artikel
+                  </Link>
+                </li>
+                <li>
                   <Link href="/about" className="text-klimacek-brown-100 hover:text-accent-yellow transition-colors duration-200 flex items-center group">
                     <span className="w-0 group-hover:w-2 h-0.5 bg-accent-yellow transition-all duration-200 mr-0 group-hover:mr-2"></span>
                     About Us
@@ -85,12 +91,6 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li className="flex items-start group">
                   <svg className="w-5 h-5 text-accent-yellow mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-klimacek-brown-100 text-sm">Mon-Fri: 08.00 - 17.00</span>
-                </li>
-                <li className="flex items-start group">
-                  <svg className="w-5 h-5 text-accent-yellow mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -102,8 +102,8 @@ export default function Footer() {
                   <svg className="w-5 h-5 text-accent-yellow mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <a href="tel:+628123456789" className="text-klimacek-brown-100 hover:text-accent-yellow transition-colors text-sm">
-                    +62 812-3456-789
+                  <a href="tel:+6281911998210" className="text-klimacek-brown-100 hover:text-accent-yellow transition-colors text-sm">
+                    +62 819-1199-8210
                   </a>
                 </li>
                 <li className="flex items-start group">
@@ -115,33 +115,6 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
-            </div>
-
-            {/* Newsletter */}
-            <div>
-              <h4 className="text-white font-bold text-lg mb-4 relative inline-block">
-                Newsletter
-                <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-accent-yellow"></span>
-              </h4>
-              <p className="text-klimacek-brown-100 text-sm mb-4">
-                Subscribe to get the latest updates and news about smart agriculture.
-              </p>
-              <form className="space-y-3">
-                <div className="relative">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 bg-klimacek-brown-700/50 border border-klimacek-brown-600 rounded-lg text-white placeholder-klimacek-brown-300 focus:outline-none focus:ring-2 focus:ring-accent-yellow focus:border-transparent transition-all text-sm"
-                    aria-label="Newsletter email"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-accent-yellow hover:bg-yellow-500 text-klimacek-brown-900 px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:shadow-lg hover:shadow-accent-yellow/50 transform hover:-translate-y-0.5 text-sm"
-                >
-                  Subscribe Now
-                </button>
-              </form>
             </div>
 
           </div>
