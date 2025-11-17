@@ -68,7 +68,7 @@ export async function getSubscriptionInfo(user: User | null): Promise<Subscripti
  */
 export function formatPlanName(plan: string): string {
   const planNames: { [key: string]: string } = {
-    'free_trial': 'Free Tier Plan',
+    'free_trial': 'Free Trial',
     'basic': 'Basic',
     'premium': 'Premium',
     'enterprise': 'Enterprise',

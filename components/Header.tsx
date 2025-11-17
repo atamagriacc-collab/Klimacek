@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
+import { useAuth } from '../lib/auth-context';
+import { getSubscriptionInfo, formatPlanName, getPlanBadgeColor, SubscriptionInfo } from '../lib/subscription-utils';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -12,6 +14,19 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const [subscriptionInfo, setSubscriptionInfo] = useState<SubscriptionInfo | null>(null);
+
+  useEffect(() => {
+    if (user) {
+      getSubscriptionInfo(user).then(info => {
+        setSubscriptionInfo(info);
+      });
+    } else {
+      setSubscriptionInfo(null);
+    }
+  }, [user]);
+
   return (
     <header className="bg-primary sticky top-0 z-30 shadow-sm">
       <nav className="max-w-7xl mx-auto flex items-center px-4 py-3 md:py-4">
@@ -29,10 +44,39 @@ export default function Header() {
             </li>
           ))}
         </ul>
-        {/* CTA */}
-        <Link href="/dashboard" className="hidden md:inline-block bg-accent text-primary font-semibold px-5 py-2 rounded-full shadow hover:bg-secondary hover:text-textPrimary transition-colors flex-shrink-0 focus:outline focus:ring-2 focus:ring-accent">
-          Dashboard Access
-        </Link>
+
+        {/* User Info & Auth Buttons */}
+        {user ? (
+          <div className="hidden md:flex items-center gap-3 flex-shrink-0">
+            {/* User Info with Subscription Badge */}
+            <div className="flex flex-col gap-1 px-3 py-2 bg-white/10 rounded-lg text-textSecondary text-sm">
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-accent" />
+                <span className="font-medium">{user.email?.split('@')[0]}</span>
+              </div>
+              {subscriptionInfo && (
+                <div className="flex items-center justify-center">
+                  <span className={`${getPlanBadgeColor(subscriptionInfo.plan, subscriptionInfo.is_expired)} text-white text-xs font-bold px-2 py-0.5 rounded-full`}>
+                    {formatPlanName(subscriptionInfo.plan)}
+                    {subscriptionInfo.is_expired && ' (Expired)'}
+                  </span>
+                </div>
+              )}
+            </div>
+            {/* Logout Button */}
+            <button
+              onClick={() => logout()}
+              className="flex items-center gap-2 px-4 py-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-200 text-sm font-medium shadow-lg hover:shadow-xl"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
+          </div>
+        ) : (
+          <Link href="/dashboard" className="hidden md:inline-block bg-accent text-primary font-semibold px-5 py-2 rounded-full shadow hover:bg-secondary hover:text-textPrimary transition-colors flex-shrink-0 focus:outline focus:ring-2 focus:ring-accent">
+            Dashboard Access
+          </Link>
+        )}
         {/* Mobile Hamburger */}
   <button className="md:hidden p-2 rounded focus:outline focus:ring-2 focus:ring-accent" aria-label="Open menu" onClick={() => setMobileOpen(true)}>
           <Menu size={28} />
@@ -44,6 +88,23 @@ export default function Header() {
               <button className="self-end mb-2 p-1 rounded focus:outline focus:ring-2 focus:ring-accent" aria-label="Close menu" onClick={() => setMobileOpen(false)}>
                 <X size={28} />
               </button>
+
+              {/* Mobile User Info */}
+              {user && subscriptionInfo && (
+                <div className="flex flex-col gap-2 px-3 py-3 bg-white/10 rounded-lg text-textSecondary">
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4 text-accent" />
+                    <span className="font-medium text-sm">{user.email?.split('@')[0]}</span>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <span className={`${getPlanBadgeColor(subscriptionInfo.plan, subscriptionInfo.is_expired)} text-white text-xs font-bold px-2 py-0.5 rounded-full`}>
+                      {formatPlanName(subscriptionInfo.plan)}
+                      {subscriptionInfo.is_expired && ' (Expired)'}
+                    </span>
+                  </div>
+                </div>
+              )}
+
               <ul className="flex flex-col gap-4 mt-4" aria-label="Mobile navigation">
                 {navLinks.map((link) => (
                   <li key={link.name}>
@@ -53,9 +114,23 @@ export default function Header() {
                   </li>
                 ))}
               </ul>
-              <Link href="/dashboard" className="mt-8 bg-accent text-primary font-semibold px-5 py-2 rounded-full shadow hover:bg-secondary hover:text-textPrimary transition-colors focus:outline focus:ring-2 focus:ring-accent text-center">
-                Dashboard Access
-              </Link>
+
+              {user ? (
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileOpen(false);
+                  }}
+                  className="mt-8 flex items-center justify-center gap-2 px-5 py-2 bg-red-600/80 hover:bg-red-600 text-white rounded-full shadow hover:shadow-xl transition-all font-semibold focus:outline focus:ring-2 focus:ring-red-400"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              ) : (
+                <Link href="/dashboard" className="mt-8 bg-accent text-primary font-semibold px-5 py-2 rounded-full shadow hover:bg-secondary hover:text-textPrimary transition-colors focus:outline focus:ring-2 focus:ring-accent text-center" onClick={() => setMobileOpen(false)}>
+                  Dashboard Access
+                </Link>
+              )}
             </div>
           </div>
         )}
