@@ -203,7 +203,7 @@ export default function ArticleDetailPage() {
             {/* Author Bio */}
             <div className="mt-12 p-6 bg-white rounded-xl border border-klimacek-brown-200">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-full bg-klimacek-brown-800 flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
+                <div className="w-16 h-16 rounded-full bg-klimacek-brown-800 flex items-center justify-center text-black font-bold text-2xl flex-shrink-0">
                   {article.author.charAt(0)}
                 </div>
                 <div>
