@@ -124,21 +124,21 @@ export default function Home() {
                 </p>
 
                 <a
-                  href="/downloads/klimacek-v1.0.1.apk"
-                  download="KlimacekApp-v1.0.1.apk"
+                  href="/klimacek-app-latest.apk"
+                  download="KlimacekApp-latest.apk"
                   onClick={() => {
                     // Track download with Vercel Analytics
                     track('APK Download', {
-                      version: '1.0.1',
+                      version: 'latest',
                       platform: 'Android',
-                      size: '11.8 MB'
+                      size: '12 MB'
                     });
 
                     // Track download with Google Analytics (if available)
                     if (typeof window !== 'undefined' && (window as any).gtag) {
                       (window as any).gtag('event', 'download', {
                         event_category: 'APK',
-                        event_label: 'KlimacekApp v1.0.1'
+                        event_label: 'KlimacekApp latest'
                       });
                     }
                   }}
@@ -146,7 +146,7 @@ export default function Home() {
                 >
                   <Download className="w-5 h-5" />
                   <span>Download APK</span>
-                  <span className="text-xs opacity-75">(11.8 MB)</span>
+                  <span className="text-xs opacity-75">(12 MB)</span>
                 </a>
               </div>
             </div>
