@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class ShopActivity extends AppCompatActivity {
 
@@ -105,7 +108,7 @@ public class ShopActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(this, productList, new ProductAdapter.OnProductClickListener() {
             @Override
             public void onProductClick(Product product) {
-                Toast.makeText(ShopActivity.this, "Membeli: " + product.getName(), Toast.LENGTH_SHORT).show();
+                openWhatsAppForProduct(product);
             }
 
             @Override
@@ -120,6 +123,42 @@ public class ShopActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(productAdapter);
+    }
+
+    private void openWhatsAppForProduct(Product product) {
+        try {
+            // Format harga dengan rupiah
+            String formattedPrice = product.getFormattedPrice();
+
+            // Buat pesan WhatsApp yang disesuaikan dengan produk
+            String message = "Halo kak, saya mau tanya-tanya terkait produk " +
+                           product.getName() + " (Harga: " + formattedPrice + ")";
+
+            // Encode message untuk URL
+            String encodedMessage = URLEncoder.encode(message, StandardCharsets.UTF_8.toString());
+
+            // Nomor WhatsApp tujuan
+            String phoneNumber = "6281911998210";
+
+            // Buat WhatsApp URL
+            String whatsappUrl = "https://wa.me/" + phoneNumber + "?text=" + encodedMessage;
+
+            // Buka WhatsApp dengan Intent
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(whatsappUrl));
+
+            // Cek apakah WhatsApp terinstall
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                // Jika WhatsApp tidak terinstall, buka di browser
+                Toast.makeText(this, "WhatsApp tidak terinstall, membuka di browser...", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Gagal membuka WhatsApp: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setupClickListeners() {
